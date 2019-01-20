@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+
+:root {
+  --heading-font-family: 'Abril Fatface', Arial, sans-serif;
+
+  --hsl-brand: 342, 89%, 39%;
+  --hsl-background: 348, 10%, 90%;
+
+  --color-brand: hsl(var(--hsl-brand));
+  --color-background: hsl(var(--hsl-background));
+
+  --header-height: 3rem;
+}

@@ -1,0 +1,63 @@
+.site {
+  background: var(--color-background);
+  height: 100vh;
+  overflow: auto;
+  padding-top: var(--header-height);
+}
+
+.site .global-header {
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.global-header {
+  background-color: var(--color-brand);
+  box-shadow: 0 0.125rem 0.5rem 0.125rem rgba(0, 0, 0, 0.25);
+  display: flex;
+  height: var(--header-height);
+}
+
+.global-header a {
+  display: block;
+}
+
+.global-header img {
+  height: var(--header-height);
+  width: var(--header-height);
+  padding: calc(var(--header-height) / 8);
+}
+
+/* -------------------------------------------------------------------------- */
+
+.festival-hero {
+  background-position: 50% 50%;
+  background-size: cover;
+  padding-top: 56.25%;
+  position: relative;
+}
+
+.festival-hero__content {
+  background-color: hsla(var(--hsl-brand), 0.75);
+  color: hsl(var(--hsl-background));
+  bottom: 2rem;
+  padding: 3rem 1rem 1rem 1rem;
+  position: absolute;
+  max-width: 30rem;
+}
+
+.festival-hero__content > h1 {
+  font-size: 3rem;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.layout-clamp {
+  max-width: 100rem;
+  padding: 0 5vw;
+  width: 100%;
+}

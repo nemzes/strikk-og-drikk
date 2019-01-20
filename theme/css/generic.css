@@ -1,0 +1,18 @@
+html {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--base-font-family);
+  text-decoration-skip-ink: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font-family);
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+}
+
+:disabled {
+  color: var(--color-disabled);
+  cursor: auto;
+}
