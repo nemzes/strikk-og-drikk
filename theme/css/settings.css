@@ -1,13 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Slab:600|Overlock:400,400i,700,700i');
 
 :root {
-  --heading-font-family: 'Abril Fatface', Arial, sans-serif;
+  --base-font-family: 'Overlock', Arial, sans-serif;
+  --heading-font-family: 'Josefin Slab', Arial, sans-serif;
 
   --hsl-brand: 342, 89%, 39%;
   --hsl-background: 348, 10%, 90%;
+  --hsl-background-text: 348, 5%, 97%;
+  --hsl-text: 348, 5%, 3%;
 
   --color-brand: hsl(var(--hsl-brand));
   --color-background: hsl(var(--hsl-background));
+  --color-background-text: hsl(var(--hsl-background-text));
+  --color-text: hsl(var(--hsl-text));
 
   --header-height: 3rem;
 }
