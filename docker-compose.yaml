@@ -17,6 +17,7 @@ services:
      volumes:
       - ./plugin:/var/www/html/wp-content/plugins/sogd
       - ./theme:/var/www/html/wp-content/themes/sogd
+      - ./data/uploads:/var/www/html/wp-content/uploads
      depends_on:
        - sogd_db
      ports:

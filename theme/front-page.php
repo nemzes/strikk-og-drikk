@@ -25,7 +25,7 @@
                   'hierarchical' => false,
                   'title_li' => null,
                 ));
-                ?>
+              ?>
             </ul>
           </div>
         </div>
@@ -33,8 +33,8 @@
       <div class="festival-hero__segue">
         <div class="layout-clamp">
           <div class="festival-hero__segue-text">
-            Arrangert av…
-            <?php include(get_template_directory() . '/img/arrow-down.svg') ?>
+            <?php echo esc_html(get_option('sogd-festival-title')); ?>
+            er arrangert av Stavanger Strikk og Drikk
           </div>
         </div>
       </div>

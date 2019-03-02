@@ -321,6 +321,10 @@ add_action( 'init', 'register_html5_menu' ); // Add HTML5 Blank Menu
 add_action( 'init', 'create_post_type_html5' ); // Add our HTML5 Blank Custom Post Type
 add_action( 'widgets_init', 'my_remove_recent_comments_style' ); // Remove inline Recent Comment Styles from wp_head()
 add_action( 'init', 'html5wp_pagination' ); // Add our HTML5 Pagination
+add_action('get_header', 'remove_admin_login_header');
+function remove_admin_login_header() {
+	remove_action('wp_head', '_admin_bar_bump_cb');
+}
 
 // Remove Actions
 remove_action( 'wp_head', 'feed_links_extra', 3 ); // Display the links to the extra feeds such as category feeds
@@ -344,7 +348,6 @@ add_filter( 'the_category', 'remove_category_rel_from_category_list' ); // Remov
 add_filter( 'the_excerpt', 'shortcode_unautop' ); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
 add_filter( 'the_excerpt', 'do_shortcode' ); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
 add_filter( 'excerpt_more', 'html5_blank_view_article' ); // Add 'View Article' button instead of [...] for Excerpts
-add_filter( 'show_admin_bar', 'remove_admin_bar' ); // Remove Admin bar
 add_filter( 'style_loader_tag', 'html5_style_remove' ); // Remove 'text/css' from enqueued stylesheet
 add_filter( 'post_thumbnail_html', 'remove_thumbnail_dimensions', 10 ); // Remove width and height dynamic attributes to thumbnails
 add_filter( 'post_thumbnail_html', 'remove_width_attribute', 10 ); // Remove width and height dynamic attributes to post images
@@ -422,4 +425,31 @@ function html5_shortcode_demo( $atts, $content = null ) {
 // Demo Heading H2 shortcode, allows for nesting within above element. Fully expandable.
 function html5_shortcode_demo_2( $atts, $content = null ) {
     return '<h2>' . $content . '</h2>';
+}
+
+
+
+// ---
+
+function sogd_is_festival_post($post_id) {
+    $festival_posts_base_cat = get_option('sogd-festival-posts-base-cat');
+    $cats = get_the_category($post_id);
+
+    if (!empty($cats)) {
+        foreach ($cats as $cat) {
+            $cat_id = $cat->term_id;
+
+            if ($cat_id === $festival_posts_base_cat) {
+                return true;
+            }
+
+            $parent_cats = get_ancestors($cat_id, 'category');
+
+            if (in_array($festival_posts_base_cat, $parent_cats)) {
+                return true;
+            }
+        }    
+    }
+
+    return false;
 }
