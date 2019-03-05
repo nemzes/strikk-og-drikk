@@ -11,24 +11,8 @@
       <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
         <?php if ($is_festival) : ?>
-          <header class="festival-header">
-            <div class="festival-header_content">
-              <h1><?php echo esc_html(get_option('sogd-festival-title')); ?></h1>
-              <nav>
-                <ul>
-                  <?php
-                    $sogd_festival_posts_base_cat = get_option('sogd-festival-posts-base-cat');
-                    wp_list_categories(array(
-                      'child_of' => $sogd_festival_posts_base_cat,
-                      'hide_empty' => false,
-                      'hierarchical' => false,
-                      'title_li' => null,
-                    ));
-                  ?>
-                </ul>
-              </nav>
-            </div>
-          </header>
+          <?php $sogd_festival_cat = sogd_get_festival_cat(get_the_ID()); ?>
+          <?php sogd_output_festival_header($sogd_festival_cat) ?>
         <?php endif; ?>
 
         <div class="singular__content">

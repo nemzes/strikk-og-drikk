@@ -369,28 +369,30 @@ add_shortcode( 'html5_shortcode_demo_2', 'html5_shortcode_demo_2' ); // Place [h
 
 // Create 1 Custom Post type for a Demo, called HTML5-Blank
 function create_post_type_html5() {
-    register_taxonomy_for_object_type( 'category', 'html5-blank' ); // Register Taxonomies for Category
-    register_taxonomy_for_object_type( 'post_tag', 'html5-blank' );
-    register_post_type( 'html5-blank', // Register Custom Post Type
+    register_taxonomy_for_object_type( 'category', 'sogd-speaker' ); // Register Taxonomies for Category
+    register_post_type( 'sogd-speaker', // Register Custom Post Type
         array(
         'labels'       => array(
-            'name'               => esc_html( 'HTML5 Blank Custom Post', 'html5blank' ), // Rename these to suit
-            'singular_name'      => esc_html( 'HTML5 Blank Custom Post', 'html5blank' ),
-            'add_new'            => esc_html( 'Add New', 'html5blank' ),
-            'add_new_item'       => esc_html( 'Add New HTML5 Blank Custom Post', 'html5blank' ),
-            'edit'               => esc_html( 'Edit', 'html5blank' ),
-            'edit_item'          => esc_html( 'Edit HTML5 Blank Custom Post', 'html5blank' ),
-            'new_item'           => esc_html( 'New HTML5 Blank Custom Post', 'html5blank' ),
-            'view'               => esc_html( 'View HTML5 Blank Custom Post', 'html5blank' ),
-            'view_item'          => esc_html( 'View HTML5 Blank Custom Post', 'html5blank' ),
-            'search_items'       => esc_html( 'Search HTML5 Blank Custom Post', 'html5blank' ),
-            'not_found'          => esc_html( 'No HTML5 Blank Custom Posts found', 'html5blank' ),
-            'not_found_in_trash' => esc_html( 'No HTML5 Blank Custom Posts found in Trash', 'html5blank' ),
+            'name'               => esc_html( 'Speakers', 'sogd' ),
+            'singular_name'      => esc_html( 'Speaker', 'sogd' ),
+            'add_new'            => esc_html( 'Add New', 'sogd' ),
+            'add_new_item'       => esc_html( 'Add New speaker', 'sogd' ),
+            'edit'               => esc_html( 'Edit', 'sogd' ),
+            'edit_item'          => esc_html( 'Edit speaker', 'sogd' ),
+            'new_item'           => esc_html( 'New speaker', 'sogd' ),
+            'view'               => esc_html( 'View speaker', 'sogd' ),
+            'view_item'          => esc_html( 'View speaker', 'sogd' ),
+            'search_items'       => esc_html( 'Search speaker', 'sogd' ),
+            'not_found'          => esc_html( 'No speakers found', 'sogd' ),
+            'not_found_in_trash' => esc_html( 'No speakers found in Trash', 'sogd' ),
         ),
         'public'       => true,
-        'hierarchical' => true, // Allows your posts to behave like Hierarchy Pages
+        'hierarchical' => false, // Allows your posts to behave like Hierarchy Pages
         'has_archive'  => true,
         'show_in_rest' => true,
+        'rewrite'      => array(
+            'slug'  => 'speakers'
+        ),
         'supports'     => array(
             'title',
             'editor',
@@ -405,51 +407,86 @@ function create_post_type_html5() {
     ) );
 }
 
-function my_plugin_allowed_block_types( $allowed_block_types, $post ) {
-    if ( $post->post_type !== 'html5-blanke' ) {
+
+function sogd_add_custom_types( $query ) {
+    if ( (is_category() || is_tag()) && $query->is_archive() && empty( $query->query_vars['suppress_filters'] ) ) {
+        $query->set( 'post_type', array( 'post', 'sogd-speaker' ));
+    }
+    return $query;
+}
+add_filter( 'pre_get_posts', 'sogd_add_custom_types' );
+
+
+function sogd_allowed_block_types( $allowed_block_types, $post ) {
+    if ( $post->post_type !== 'sogd-speakerX' ) {
         return $allowed_block_types;
     }
     return array( 'core/image', 'core/gallery' );
 }
-add_filter( 'allowed_block_types', 'my_plugin_allowed_block_types', 10, 2 );
-
-/*------------------------------------*\
-    ShortCode Functions
-\*------------------------------------*/
-
-// Shortcode Demo with Nested Capability
-function html5_shortcode_demo( $atts, $content = null ) {
-    return '<div class="shortcode-demo">' . do_shortcode( $content ) . '</div>'; // do_shortcode allows for nested Shortcodes
-}
-
-// Demo Heading H2 shortcode, allows for nesting within above element. Fully expandable.
-function html5_shortcode_demo_2( $atts, $content = null ) {
-    return '<h2>' . $content . '</h2>';
-}
-
+add_filter( 'allowed_block_types', 'sogd_allowed_block_types', 10, 2 );
 
 
 // ---
 
 function sogd_is_festival_post($post_id) {
-    $festival_posts_base_cat = get_option('sogd-festival-posts-base-cat');
+    $sogd_festivals_parent_cat = get_option('sogd-festivals-parent-cat');
     $cats = get_the_category($post_id);
 
     if (!empty($cats)) {
         foreach ($cats as $cat) {
             $cat_id = $cat->term_id;
 
-            if ($cat_id === $festival_posts_base_cat) {
+            if ($cat_id === $sogd_festivals_parent_cat) {
                 return true;
             }
 
             $parent_cats = get_ancestors($cat_id, 'category');
 
-            if (in_array($festival_posts_base_cat, $parent_cats)) {
+            if (in_array($sogd_festivals_parent_cat, $parent_cats)) {
                 return true;
             }
         }    
     }
 
     return false;
+}
+
+function sogd_get_festival_cat($post_id) {
+    $sogd_festivals_parent_cat = get_option('sogd-festivals-parent-cat');
+    $cats = get_the_category($post_id);
+
+    if (!empty($cats)) {
+        foreach ($cats as $cat) {
+            $parent_cat_ids = get_ancestors($cat->term_id, 'category');
+
+            foreach ($parent_cat_ids as $parent_cat_id) {
+                $parent_cat = get_category($parent_cat_id);
+                if ($parent_cat->parent == $sogd_festivals_parent_cat) {
+                    return $parent_cat;
+                }
+            }
+        }
+    }
+}
+
+function sogd_output_festival_header($festival_cat) {
+    ?>
+        <header class="festival-header">
+        <div class="festival-header_content">
+            <h1><?php echo esc_html($festival_cat->name); ?></h1>
+            <nav>
+            <ul>
+                <?php
+                wp_list_categories(array(
+                    'child_of' => $festival_cat->term_id,
+                    'hide_empty' => false,
+                    'hierarchical' => false,
+                    'title_li' => null,
+                ));
+                ?>
+            </ul>
+            </nav>
+        </div>
+        </header>
+    <?php
 }

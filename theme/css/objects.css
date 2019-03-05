@@ -116,10 +116,6 @@
   text-decoration: none;
 }
 
-.festival-hero__links a::before {
-  content: '> ';
-}
-
 .festival-hero__segue {
   background-color: var(--color-mood);
   margin-top: var(--space-7);

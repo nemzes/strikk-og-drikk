@@ -10,6 +10,9 @@ License: MIT
 
 defined('ABSPATH') or die('No script kiddies please!');
 
+// plugin init
+add_action('init', 'sogd_change_permalinks');
+
 // create custom plugin settings menu
 add_action('admin_menu', 'sogd_create_menu');
 
@@ -21,12 +24,10 @@ function sogd_create_menu()
 
 function sogd_register_settings()
 {
-    //register our settings
+    register_setting('sogd-settings', 'sogd-festivals-parent-cat');
+
     register_setting('sogd-settings', 'sogd-festival-enabled');
-    register_setting('sogd-settings', 'sogd-festival-title');
-    register_setting('sogd-settings', 'sogd-festival-posts-base-cat');
-    register_setting('sogd-settings', 'sogd-festival-events-cat');
-    register_setting('sogd-settings', 'sogd-festival-front-blurb');
+    register_setting('sogd-settings', 'sogd-festival-current-cat');
 
     register_setting('sogd-settings', 'sogd-front-title');
     register_setting('sogd-settings', 'sogd-front-blurb');
@@ -42,7 +43,24 @@ function sogd_settings_page()
         <?php settings_fields('sogd-settings'); ?>
         <?php do_settings_sections('sogd-settings'); ?>
 
-        <h2>Festival</h2>
+        <h2>Festivals</h2>
+
+        <p>
+          <label>
+            Parent category for all festivals
+            <?php wp_dropdown_categories(array(
+                'name' => 'sogd-festivals-parent-cat',
+                'selected' => get_option('sogd-festivals-parent-cat'),
+                'hierarchical' => true,
+                'hide_empty' => false
+              ));
+            ?>
+          </label>
+        </p>
+
+        <?php submit_button('Save', 'primary'); ?>
+
+        <h2>Current festival</h2>
 
         <p>
           <label>
@@ -52,47 +70,23 @@ function sogd_settings_page()
         </p>
         <p>
           <label>
-            Festival title
-            <input type="text" name="sogd-festival-title" value="<?php echo esc_attr(get_option('sogd-festival-title')); ?>" />
-          </label>
-        </p>
-        <p>
-          <label>
-            Festival posts base category
+            Category for current festival
             <?php wp_dropdown_categories(array(
-                'name' => 'sogd-festival-posts-base-cat',
-                'selected' => get_option('sogd-festival-posts-base-cat'),
+                'name' => 'sogd-festival-current-cat',
+                'child_of' => get_option('sogd-festivals-parent-cat'),
+                'selected' => get_option('sogd-festival-current-cat'),
                 'hierarchical' => true,
+                'depth' => 1,
                 'hide_empty' => false
               ));
             ?>
           </label>
         </p>
         <p>
-          <label>
-            Festival events category
-            <?php wp_dropdown_categories(array(
-                'name' => 'sogd-festival-events-cat',
-                'selected' => get_option('sogd-festival-events-cat'),
-                'hide_empty' => false,
-                'taxonomy' => 'event-category'
-              ));
-            ?>
-          </label>
+          NB: The events category tree must have a category with the <strong>exact same</strong> slug name.
         </p>
-        <p>Festival front page blurb</p>
-        <?php
-          $content = get_option('sogd-festival-front-blurb');
-          wp_editor(
-            $content,
-            'sogd-festival-front-blurb',
-            $settings = array(
-              'textarea_rows' => '10',
-              'teeny' => true,
-              'media_buttons' => false,
-              'quicktags' => false,
-            ));
-        ?>
+
+        <?php submit_button('Save', 'primary'); ?>
 
         <h2>Front page</h2>
 
@@ -119,4 +113,10 @@ function sogd_settings_page()
       </form>
     </div>
   <?php
+}
+
+function sogd_change_permalinks() {
+  global $wp_rewrite;
+  $wp_rewrite->set_permalink_structure('/%year%/%monthnum%/%day%/%postname%/');
+  $wp_rewrite->flush_rules();
 }
