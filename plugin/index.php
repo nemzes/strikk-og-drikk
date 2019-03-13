@@ -12,6 +12,13 @@ defined('ABSPATH') or die('No script kiddies please!');
 
 // plugin init
 add_action('init', 'sogd_change_permalinks');
+add_post_type_support('page', 'excerpt');
+
+function sogd_change_permalinks() {
+  global $wp_rewrite;
+  $wp_rewrite->set_permalink_structure('/%year%/%monthnum%/%day%/%postname%/');
+  $wp_rewrite->flush_rules();
+}
 
 // create custom plugin settings menu
 add_action('admin_menu', 'sogd_create_menu');
@@ -28,6 +35,7 @@ function sogd_register_settings()
 
     register_setting('sogd-settings', 'sogd-festival-enabled');
     register_setting('sogd-settings', 'sogd-festival-current-cat');
+    register_setting('sogd-settings', 'sogd-festival-current-page');
 
     register_setting('sogd-settings', 'sogd-front-title');
     register_setting('sogd-settings', 'sogd-front-blurb');
@@ -85,6 +93,17 @@ function sogd_settings_page()
         <p>
           NB: The events category tree must have a category with the <strong>exact same</strong> slug name.
         </p>
+        <p>
+          <label>
+            Page for current festival
+            <?php wp_dropdown_pages(array(
+                'name' => 'sogd-festival-current-page',
+                'selected' => get_option('sogd-festival-current-page'),
+                'show_option_none' => '— none —',
+              ));
+            ?>
+          </label>
+        </p>
 
         <?php submit_button('Save', 'primary'); ?>
 
@@ -113,10 +132,4 @@ function sogd_settings_page()
       </form>
     </div>
   <?php
-}
-
-function sogd_change_permalinks() {
-  global $wp_rewrite;
-  $wp_rewrite->set_permalink_structure('/%year%/%monthnum%/%day%/%postname%/');
-  $wp_rewrite->flush_rules();
 }

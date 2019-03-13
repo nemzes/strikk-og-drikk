@@ -15,9 +15,9 @@ services:
    sogd_webserver:
      image: wordpress:5
      volumes:
+      - ./data/wp-content:/var/www/html/wp-content
       - ./plugin:/var/www/html/wp-content/plugins/sogd
       - ./theme:/var/www/html/wp-content/themes/sogd
-      - ./data/uploads:/var/www/html/wp-content/uploads
      depends_on:
        - sogd_db
      ports:

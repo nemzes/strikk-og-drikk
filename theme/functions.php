@@ -457,6 +457,10 @@ function sogd_get_festival_cat($post_id) {
 
     if (!empty($cats)) {
         foreach ($cats as $cat) {
+            if ($cat->parent == $sogd_festivals_parent_cat) {
+                return $cat;
+            }
+
             $parent_cat_ids = get_ancestors($cat->term_id, 'category');
 
             foreach ($parent_cat_ids as $parent_cat_id) {
@@ -475,18 +479,60 @@ function sogd_output_festival_header($festival_cat) {
         <div class="festival-header_content">
             <h1><?php echo esc_html($festival_cat->name); ?></h1>
             <nav>
-            <ul>
-                <?php
-                wp_list_categories(array(
-                    'child_of' => $festival_cat->term_id,
-                    'hide_empty' => false,
-                    'hierarchical' => false,
-                    'title_li' => null,
-                ));
-                ?>
-            </ul>
+                <?php sogd_output_festival_links($festival_cat->term_id) ?>
             </nav>
         </div>
         </header>
     <?php
+}
+
+function sogd_output_festival_links($festival_cat_id) {
+    ?>
+        <ul>
+            <?php
+                wp_list_categories(array(
+                    'child_of' => $festival_cat_id,
+                    'hide_empty' => false,
+                    'hierarchical' => false,
+                    'title_li' => null,
+                    'show_option_none' => false,
+                ));
+
+                $festival_posts = sogd_get_festival_root_posts($festival_cat_id);
+
+                foreach ($festival_posts as $post) {
+                    ?>
+                        <li>
+                            <a href="<?php the_permalink($post->ID) ?>">
+                                <?php echo htmlspecialchars($post->post_title); ?>
+                            </a>
+                        </li>
+                    <?php
+                }
+            ?>
+        </ul>
+    <?php
+}
+
+function sogd_get_festival_root_posts($festival_cat_id) {
+    $query = new WP_Query(array(
+        'category__in' => $festival_cat_id
+    ));
+
+    return $query->get_posts();
+}
+
+function sogd_output_page_content($page_id) {
+    $query = new WP_Query(array(
+        'p' => $page_id,
+        'post_type' => 'page',
+    ));
+      
+    if ( $query->have_posts() ) {
+        while ( $query->have_posts() ) { 
+            $query->the_post();
+            the_content(false);
+        }
+        wp_reset_postdata();
+    }
 }

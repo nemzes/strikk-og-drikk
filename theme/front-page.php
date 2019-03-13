@@ -14,19 +14,10 @@
       <div class="layout-clamp">
         <div class="festival-hero__content">
           <div class="festival-hero__blurb">
-            <?php echo esc_html($sogd_festival_current_cat->description); ?>
+            <?php sogd_output_page_content(get_option('sogd-festival-current-page')) ?>
           </div>
           <div class="festival-hero__links">
-            <ul>
-              <?php
-                wp_list_categories(array(
-                  'child_of' => $sogd_festival_current_cat->term_id,
-                  'hide_empty' => false,
-                  'hierarchical' => false,
-                  'title_li' => null,
-                ));
-              ?>
-            </ul>
+            <?php sogd_output_festival_links($sogd_festival_current_cat->term_id); ?>
           </div>
         </div>
       </div>
