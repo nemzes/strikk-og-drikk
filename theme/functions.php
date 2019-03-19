@@ -318,7 +318,6 @@ add_action( 'wp_print_scripts', 'html5blank_conditional_scripts' ); // Add Condi
 add_action( 'get_header', 'enable_threaded_comments' ); // Enable Threaded Comments
 add_action( 'wp_enqueue_scripts', 'html5blank_styles' ); // Add Theme Stylesheet
 add_action( 'init', 'register_html5_menu' ); // Add HTML5 Blank Menu
-add_action( 'init', 'create_post_type_html5' ); // Add our HTML5 Blank Custom Post Type
 add_action( 'widgets_init', 'my_remove_recent_comments_style' ); // Remove inline Recent Comment Styles from wp_head()
 add_action( 'init', 'html5wp_pagination' ); // Add our HTML5 Pagination
 add_action('get_header', 'remove_admin_login_header');
@@ -362,69 +361,6 @@ add_shortcode( 'html5_shortcode_demo_2', 'html5_shortcode_demo_2' ); // Place [h
 
 // Shortcodes above would be nested like this -
 // [html5_shortcode_demo] [html5_shortcode_demo_2] Here's the page title! [/html5_shortcode_demo_2] [/html5_shortcode_demo]
-
-/*------------------------------------*\
-    Custom Post Types
-\*------------------------------------*/
-
-// Create 1 Custom Post type for a Demo, called HTML5-Blank
-function create_post_type_html5() {
-    register_taxonomy_for_object_type( 'category', 'sogd-speaker' ); // Register Taxonomies for Category
-    register_post_type( 'sogd-speaker', // Register Custom Post Type
-        array(
-        'labels'       => array(
-            'name'               => esc_html( 'Speakers', 'sogd' ),
-            'singular_name'      => esc_html( 'Speaker', 'sogd' ),
-            'add_new'            => esc_html( 'Add New', 'sogd' ),
-            'add_new_item'       => esc_html( 'Add New speaker', 'sogd' ),
-            'edit'               => esc_html( 'Edit', 'sogd' ),
-            'edit_item'          => esc_html( 'Edit speaker', 'sogd' ),
-            'new_item'           => esc_html( 'New speaker', 'sogd' ),
-            'view'               => esc_html( 'View speaker', 'sogd' ),
-            'view_item'          => esc_html( 'View speaker', 'sogd' ),
-            'search_items'       => esc_html( 'Search speaker', 'sogd' ),
-            'not_found'          => esc_html( 'No speakers found', 'sogd' ),
-            'not_found_in_trash' => esc_html( 'No speakers found in Trash', 'sogd' ),
-        ),
-        'public'       => true,
-        'hierarchical' => false, // Allows your posts to behave like Hierarchy Pages
-        'has_archive'  => true,
-        'show_in_rest' => true,
-        'rewrite'      => array(
-            'slug'  => 'speakers'
-        ),
-        'supports'     => array(
-            'title',
-            'editor',
-            'excerpt',
-            'thumbnail'
-        ), // Go to Dashboard Custom HTML5 Blank post for supports
-        'can_export'   => true, // Allows export in Tools > Export
-        'taxonomies'   => array(
-            'post_tag',
-            'category'
-        ) // Add Category and Post Tags support
-    ) );
-}
-
-
-function sogd_add_custom_types( $query ) {
-    if ( (is_category() || is_tag()) && $query->is_archive() && empty( $query->query_vars['suppress_filters'] ) ) {
-        $query->set( 'post_type', array( 'post', 'sogd-speaker' ));
-    }
-    return $query;
-}
-add_filter( 'pre_get_posts', 'sogd_add_custom_types' );
-
-
-function sogd_allowed_block_types( $allowed_block_types, $post ) {
-    if ( $post->post_type !== 'sogd-speakerX' ) {
-        return $allowed_block_types;
-    }
-    return array( 'core/image', 'core/gallery' );
-}
-add_filter( 'allowed_block_types', 'sogd_allowed_block_types', 10, 2 );
-
 
 // ---
 
