@@ -21,7 +21,7 @@ function sogd_post_festival_create() {
             'not_found_in_trash' => esc_html( 'No festivals found in Trash', 'sogd' ),
         ),
         'public'       => true,
-        'hierarchical' => false,
+        'hierarchical' => true,
         'has_archive'  => true,
         'show_in_rest' => true,
         'rewrite'      => array(
@@ -44,7 +44,7 @@ function sogd_post_festival_allowed_blocks( $allowed_block_types, $post ) {
     if ( $post->post_type !== 'sogd-festival' ) {
         return $allowed_block_types;
     }
-
+    
     return array(
         'core/gallery',
         'core/heading',
@@ -58,4 +58,83 @@ function sogd_post_festival_allowed_blocks( $allowed_block_types, $post ) {
         'core-embed/twitter',
         'core-embed/youtube',
     );
+}
+
+// ----------------------------------------------------------------------------
+
+add_action( 'add_meta_boxes', 'sogd_post_festival_front_blurb_meta_box' );
+
+function sogd_post_festival_front_blurb_meta_box() {
+    add_meta_box(
+        'sogd_post_festival_front_blurb', // $id
+        'Front page blurb', // $title
+        'sogd_post_festival_front_page_blurb', // $callback
+        'sogd-festival', // $screen
+        'normal', // $context
+        'high' // $priority
+    );
+}
+
+function sogd_post_festival_front_page_blurb() {
+    global $post;
+    $sogd_festival_fields = get_post_meta( $post->ID, 'sogd_festival', true );
+    ?>
+        <input
+            name="sogd_post_festival_front_page_blurb_nonce"
+            type="hidden"
+            value="<?php echo wp_create_nonce( basename(__FILE__) ); ?>"
+        >
+
+        <label
+            class="screen-reader-text"
+            for="sogd_festival_front_blurb"
+        >
+            Front page blurb
+        </label>
+
+        <?php
+            wp_editor(
+                is_array($sogd_festival_fields) ? $sogd_festival_fields['front-blurb'] : '',
+                'sogd_festival_front_blurb',
+                $settings = array(
+                    'media_buttons' => false,
+                    'textarea_name' => 'sogd_festival[front-blurb]',
+                    'textarea_rows' => 4
+                )
+            );
+        ?>
+
+        <p>TODO: Add field to choose parent category for post taxonomy for this festival</p>
+        <p>TODO: Add field to choose parent category for event taxonomy for this festival</p>
+    <?php
+}
+
+add_action( 'save_post', 'sogd_post_festival_front_page_blurb_save' );
+
+function sogd_post_festival_front_page_blurb_save( $post_id ) {
+    // verify nonce
+    if ( !wp_verify_nonce( $_POST['sogd_post_festival_front_page_blurb_nonce'], basename(__FILE__) ) ) {
+        return $post_id;
+    }
+    // check autosave
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return $post_id;
+    }
+    // check permissions
+    if ( 'sogd-festival' === $_POST['post_type'] ) {
+        if ( !current_user_can( 'edit_page', $post_id ) ) {
+            return $post_id;
+        } elseif ( !current_user_can( 'edit_post', $post_id ) ) {
+            return $post_id;
+        }
+    }
+
+    $old = get_post_meta( $post_id, 'sogd_festival', true );
+    $new = $_POST['sogd_festival'];
+
+    if ( $new && $new !== $old ) {
+        update_post_meta( $post_id, 'sogd_festival', $new );
+    } elseif ( '' === $new && $old ) {
+        delete_post_meta( $post_id, 'sogd_festival', $old );
+    }
 }

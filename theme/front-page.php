@@ -2,29 +2,31 @@
 
 <main role="main" aria-label="Content">
   <?php if (get_option('sogd-festival-enabled')) : ?>
-    <?php $sogd_festival_current_cat = get_category(get_option('sogd-festival-current-cat')); ?>
+    <?php $sogd_festival_id = get_option('sogd-festival-current'); ?>
+    <?php $sogd_festival_current = get_post($sogd_festival_id); ?>
+    <?php $sogd_festival_fields = get_post_meta($sogd_festival_id, 'sogd_festival', true); ?>
     <section class="festival-hero">
       <div class="festival-hero__back">
         <div class="layout-clamp">
           <div class="festival-hero__heading">
-            <h1><?php echo esc_html($sogd_festival_current_cat->name); ?></h1>
+            <h1><?php echo esc_html($sogd_festival_current->post_title); ?></h1>
           </div>
         </div>
       </div>
       <div class="layout-clamp">
         <div class="festival-hero__content">
           <div class="festival-hero__blurb">
-            <?php sogd_output_page_content(get_option('sogd-festival-current-page')) ?>
+            <?php echo wp_kses_post($sogd_festival_fields['front-blurb']) ?>
           </div>
           <div class="festival-hero__links">
-            <?php sogd_output_festival_links($sogd_festival_current_cat->term_id); ?>
+            <?php // need to sort out how this works… sogd_output_festival_links($sogd_festival_current->term_id); ?>
           </div>
         </div>
       </div>
       <div class="festival-hero__segue">
         <div class="layout-clamp">
           <div class="festival-hero__segue-text">
-            <?php echo esc_html($sogd_festival_current_cat->name); ?>
+            <?php echo esc_html($sogd_festival_current->post_title); ?>
             er arrangert av Stavanger Strikk og Drikk
           </div>
         </div>

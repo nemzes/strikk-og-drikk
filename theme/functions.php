@@ -461,7 +461,7 @@ function sogd_get_festival_root_posts($festival_cat_id) {
 function sogd_output_page_content($page_id) {
     $query = new WP_Query(array(
         'p' => $page_id,
-        'post_type' => 'page',
+        //'post_type' => 'page',
     ));
       
     if ( $query->have_posts() ) {

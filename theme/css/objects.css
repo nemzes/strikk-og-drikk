@@ -279,7 +279,10 @@
   color: var(--color-festival-text);
   padding: var(--space-5) 0;
   position: sticky;
-  text-shadow: 0 0 var(--space-3) #fff;
+  text-shadow:
+    0 0 var(--space-3) #fff,
+    0 0 var(--space-4) #fff,
+    0 0 var(--space-5) #fff;
   top: 0;
   z-index: 2;
 }
