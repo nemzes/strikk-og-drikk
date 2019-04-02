@@ -62,58 +62,87 @@ function sogd_post_festival_allowed_blocks( $allowed_block_types, $post ) {
 
 // ----------------------------------------------------------------------------
 
-add_action( 'add_meta_boxes', 'sogd_post_festival_front_blurb_meta_box' );
+add_action( 'add_meta_boxes', 'sogd_post_festival_config_meta_box' );
 
-function sogd_post_festival_front_blurb_meta_box() {
+function sogd_post_festival_config_meta_box() {
     add_meta_box(
-        'sogd_post_festival_front_blurb', // $id
-        'Front page blurb', // $title
-        'sogd_post_festival_front_page_blurb', // $callback
+        'sogd_post_festival_config', // $id
+        'Festival configuration', // $title
+        'sogd_post_festival_configuration', // $callback
         'sogd-festival', // $screen
         'normal', // $context
         'high' // $priority
     );
 }
 
-function sogd_post_festival_front_page_blurb() {
+function sogd_post_festival_configuration() {
     global $post;
     $sogd_festival_fields = get_post_meta( $post->ID, 'sogd_festival', true );
     ?>
         <input
-            name="sogd_post_festival_front_page_blurb_nonce"
+            name="sogd_post_festival_configuration_nonce"
             type="hidden"
             value="<?php echo wp_create_nonce( basename(__FILE__) ); ?>"
         >
 
-        <label
-            class="screen-reader-text"
-            for="sogd_festival_front_blurb"
-        >
-            Front page blurb
-        </label>
+        <h3>Front page blurb</h3>
 
         <?php
             wp_editor(
-                is_array($sogd_festival_fields) ? $sogd_festival_fields['front-blurb'] : '',
+                is_array($sogd_festival_fields) ? $sogd_festival_fields['front-blurb'] : -1,
                 'sogd_festival_front_blurb',
                 $settings = array(
                     'media_buttons' => false,
                     'textarea_name' => 'sogd_festival[front-blurb]',
-                    'textarea_rows' => 4
+                    'textarea_rows' => 4,
+                    'teeny' => true,
+                    'quicktags' => false
                 )
             );
         ?>
 
-        <p>TODO: Add field to choose parent category for post taxonomy for this festival</p>
-        <p>TODO: Add field to choose parent category for event taxonomy for this festival</p>
+        <p class="description">
+            The blurb will be on the front page of the site if this is the active festival
+        </p>
+
+        <h3>Parent category for festival posts</h3>
+
+        <?php
+            wp_dropdown_categories( array(
+                'hide_empty'         => 0,
+                'show_option_none'   => ' — Please select — ',
+                'selected'           => is_array($sogd_festival_fields) ? $sogd_festival_fields['posts-cat'] : -1,
+                'hierarchical'       => 1,
+                'id'                 => 'sogd_festival_posts_cat',
+                'name'               => 'sogd_festival[posts-cat]',
+            ) );
+        ?>
+
+        <p class="description">Subcategories of this become the menu of the festival</p>
+
+        <h3>Parent category for festival events</h3>
+
+        <?php
+            wp_dropdown_categories( array(
+                'hide_empty'         => 0,
+                'show_option_none'   => ' — Please select — ',
+                'selected'           => is_array($sogd_festival_fields) ? $sogd_festival_fields['events-cat'] : -1,
+                'hierarchical'       => 1,
+                'id'                 => 'sogd_festival_events_cat',
+                'name'               => 'sogd_festival[events-cat]',
+                'taxonomy'           => 'event-category',
+            ) );
+        ?>
+
+        <p class="description">Events within this become part of the program</p>
     <?php
 }
 
-add_action( 'save_post', 'sogd_post_festival_front_page_blurb_save' );
+add_action( 'save_post', 'sogd_post_festival_configuration_save' );
 
-function sogd_post_festival_front_page_blurb_save( $post_id ) {
+function sogd_post_festival_configuration_save( $post_id ) {
     // verify nonce
-    if ( !wp_verify_nonce( $_POST['sogd_post_festival_front_page_blurb_nonce'], basename(__FILE__) ) ) {
+    if ( !wp_verify_nonce( $_POST['sogd_post_festival_configuration_nonce'], basename(__FILE__) ) ) {
         return $post_id;
     }
     // check autosave
