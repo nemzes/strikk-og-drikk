@@ -9,7 +9,11 @@
       <div class="festival-hero__back">
         <div class="layout-clamp">
           <div class="festival-hero__heading">
-            <h1><?php echo esc_html($sogd_festival_current->post_title); ?></h1>
+            <h1>
+              <a href="<?php the_permalink($sogd_festival_id) ?>">
+                <?php echo esc_html($sogd_festival_current->post_title); ?>
+              </a>
+            </h1>
           </div>
         </div>
       </div>
@@ -19,7 +23,7 @@
             <?php echo wp_kses_post($sogd_festival_fields['front-blurb']) ?>
           </div>
           <div class="festival-hero__links">
-            <?php // need to sort out how this works… sogd_output_festival_links($sogd_festival_current->term_id); ?>
+            <?php sogd_output_festival_links($sogd_festival_current); ?>
           </div>
         </div>
       </div>

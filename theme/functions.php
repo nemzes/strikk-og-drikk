@@ -365,21 +365,31 @@ add_shortcode( 'html5_shortcode_demo_2', 'html5_shortcode_demo_2' ); // Place [h
 // ---
 
 function sogd_is_festival_post($post_id) {
-    $sogd_festivals_parent_cat = get_option('sogd-festivals-parent-cat');
-    $cats = get_the_category($post_id);
+    $festivals = get_posts([
+        'post_type' => 'festival',
+        'post_status' => 'publish',
+        'numberposts' => -1
+    ]);
 
-    if (!empty($cats)) {
-        foreach ($cats as $cat) {
-            $cat_id = $cat->term_id;
+    $post_cats = get_the_category($post_id);
 
-            if ($cat_id === $sogd_festivals_parent_cat) {
-                return true;
-            }
+    if (!empty($post_cats)) {
+        foreach ($post_cats as $post_cat) {
+            $post_cat_id = $post_cat->term_id;
+            $post_cat_parents = get_ancestors($post_cat, 'category');
 
-            $parent_cats = get_ancestors($cat_id, 'category');
+            foreach ($festivals as $festival) {
+                $festival_cats = get_the_category($festival->ID);
 
-            if (in_array($sogd_festivals_parent_cat, $parent_cats)) {
-                return true;
+                foreach ($festival_cats as $festival_cat) {
+                    if ($post_cat_id === $festival_cat->term_id) {
+                        return true;
+                    }
+
+                    if (in_array($festival_cat, $post_cat_parents)) {
+                        return true;
+                    }
+                }
             }
         }    
     }
@@ -387,67 +397,85 @@ function sogd_is_festival_post($post_id) {
     return false;
 }
 
-function sogd_get_festival_cat($post_id) {
-    $sogd_festivals_parent_cat = get_option('sogd-festivals-parent-cat');
-    $cats = get_the_category($post_id);
+function sogd_get_post_festival($post_id) {
+    $festivals = get_posts([
+        'post_type' => 'sogd-festival',
+        'post_status' => 'publish',
+        'numberposts' => -1
+    ]);
 
-    if (!empty($cats)) {
-        foreach ($cats as $cat) {
-            if ($cat->parent == $sogd_festivals_parent_cat) {
-                return $cat;
-            }
+    $post_cats = get_the_category($post_id);
 
-            $parent_cat_ids = get_ancestors($cat->term_id, 'category');
+    if (!empty($post_cats)) {
+        foreach ($post_cats as $post_cat) {
+            $post_cat_id = $post_cat->term_id;
+            $post_cat_parents = get_ancestors($post_cat_id, 'category');
 
-            foreach ($parent_cat_ids as $parent_cat_id) {
-                $parent_cat = get_category($parent_cat_id);
-                if ($parent_cat->parent == $sogd_festivals_parent_cat) {
-                    return $parent_cat;
+            foreach ($festivals as $festival) {
+                $festival_parent_cat = sogd_get_festival_parent_cat($festival);
+
+                if ($post_cat_id === $festival_parent_cat) {
+                    return $festival;
+                }
+
+                if (in_array($festival_parent_cat, $post_cat_parents)) {
+                    return $festival;
                 }
             }
-        }
+        }    
     }
 }
 
-function sogd_output_festival_header($festival_cat) {
+function sogd_get_festival_parent_cat($festival) {
+    $festival_fields = get_post_meta($festival->ID, 'sogd_festival', true);
+    return $festival_fields ? $festival_fields['posts-cat'] : null;
+}
+
+function sogd_output_festival_header($festival) {
     ?>
         <header class="festival-header">
         <div class="festival-header_content">
-            <h1><?php echo esc_html($festival_cat->name); ?></h1>
+            <h1>
+                <a href="<?php the_permalink($festival->ID) ?>">
+                    <?php echo esc_html($festival->post_title); ?>
+                </a>
+            </h1>
             <nav>
-                <?php sogd_output_festival_links($festival_cat->term_id) ?>
+                <?php sogd_output_festival_links($festival) ?>
             </nav>
         </div>
         </header>
     <?php
 }
 
-function sogd_output_festival_links($festival_cat_id) {
-    ?>
-        <ul>
-            <?php
-                wp_list_categories(array(
-                    'child_of' => $festival_cat_id,
-                    'hide_empty' => false,
-                    'hierarchical' => false,
-                    'title_li' => null,
-                    'show_option_none' => false,
-                ));
+function sogd_output_festival_links($festival) {
+    if ($festival_parent_cat = sogd_get_festival_parent_cat($festival)) {
+        ?>
+            <ul>
+                <?php
+                    wp_list_categories(array(
+                        'child_of' => $festival_parent_cat,
+                        'hide_empty' => false,
+                        'hierarchical' => false,
+                        'title_li' => null,
+                        'show_option_none' => false,
+                    ));
 
-                $festival_posts = sogd_get_festival_root_posts($festival_cat_id);
+                    $festival_posts = sogd_get_festival_root_posts($festival_parent_cat);
 
-                foreach ($festival_posts as $post) {
-                    ?>
-                        <li>
-                            <a href="<?php the_permalink($post->ID) ?>">
-                                <?php echo htmlspecialchars($post->post_title); ?>
-                            </a>
-                        </li>
-                    <?php
-                }
-            ?>
-        </ul>
-    <?php
+                    foreach ($festival_posts as $post) {
+                        ?>
+                            <li>
+                                <a href="<?php the_permalink($post->ID) ?>">
+                                    <?php echo htmlspecialchars($post->post_title); ?>
+                                </a>
+                            </li>
+                        <?php
+                    }
+                ?>
+            </ul>
+        <?php
+    }
 }
 
 function sogd_get_festival_root_posts($festival_cat_id) {

@@ -3,16 +3,16 @@
   <?php if (have_posts()) : the_post(); ?>
 
     <?php
-      $is_festival = sogd_is_festival_post(get_the_ID());
-      $extra_class = $is_festival ? 'singular--festival' : '';
+      $festival = sogd_get_post_festival(get_the_ID());
+      $is_festival_post = !!$festival;
+      $extra_class = $is_festival_post ? 'singular--festival' : '';
     ?>
 
     <main role="main" aria-label="Content" class="singular <?php echo $extra_class ?>">
       <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-        <?php if ($is_festival) : ?>
-          <?php $sogd_festival_cat = sogd_get_festival_cat(get_the_ID()); ?>
-          <?php sogd_output_festival_header($sogd_festival_cat) ?>
+        <?php if ($is_festival_post) : ?>
+          <?php sogd_output_festival_header($festival) ?>
         <?php endif; ?>
 
         <div class="singular__content">
