@@ -7,7 +7,7 @@
     <?php $sogd_festival_fields = get_post_meta($sogd_festival_id, 'sogd_festival', true); ?>
     <section class="festival-hero">
       <div class="festival-hero__back">
-        <div class="layout-clamp">
+        <div class="ssod-layout-clamp">
           <div class="festival-hero__heading">
             <h1>
               <a href="<?php the_permalink($sogd_festival_id) ?>">
@@ -17,7 +17,7 @@
           </div>
         </div>
       </div>
-      <div class="layout-clamp">
+      <div class="ssod-layout-clamp">
         <div class="festival-hero__content">
           <div class="festival-hero__blurb">
             <?php echo wp_kses_post($sogd_festival_fields['front-blurb']) ?>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="festival-hero__segue">
-        <div class="layout-clamp">
+        <div class="ssod-layout-clamp">
           <div class="festival-hero__segue-text">
             <?php echo esc_html($sogd_festival_current->post_title); ?>
             er arrangert av Stavanger Strikk og Drikk
@@ -39,7 +39,7 @@
   <?php endif; ?>
 
   <section class="hero">
-    <div class="layout-clamp">
+    <div class="ssod-layout-clamp">
       <div class="hero__layout">
         <?php include(get_template_directory() . '/img/logo.svg') ?>
         <div class="hero__text">
@@ -52,10 +52,15 @@
     </div>
   </section>
 
-  <section class="latest-posts">
-    <?php get_template_part('loop'); ?>
-    <?php get_template_part('pagination'); ?>
-  </section>
+  <div class="ssod-layout-clamp">
+    <div class="ssod-layout-sidebar">
+      <section>
+        <?php get_template_part('loop'); ?>
+        <?php get_template_part('pagination'); ?>
+      </section>
+      <?php get_template_part('events'); ?>
+    </div>
+  </div>
 </main>
 
 <?php get_footer();

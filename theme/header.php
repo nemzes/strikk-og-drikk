@@ -23,7 +23,7 @@
 			<!-- header -->
 			<header class="global-header clear" role="banner">
 
-				<div class="layout-clamp">
+				<div class="ssod-layout-clamp">
 					<div class="site-logo">
 						<a href="<?php echo esc_url( home_url() ); ?>">
 							<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/logo-small.svg" alt="Logo">

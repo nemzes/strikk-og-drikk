@@ -25,7 +25,7 @@
 
 .global-header {
   background-color: var(--color-brand);
-  box-shadow: 0 var(--space-2) var(--space-4) var(--space-2) rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-1);
   display: flex;
   height: var(--header-height);
 }
@@ -147,6 +147,7 @@
 .hero {
   background-color: var(--color-mood);
   padding: var(--space-6) 0;
+  margin-bottom: calc(var(--space-7) * 2);
 }
 
 .hero__layout {
@@ -340,7 +341,6 @@
 }
 
 .body-text img {
-  border-radius: var(--space-5);
   border: var(--space-2) solid var(--color-brand);
   box-sizing: content-box;
   display: block;
@@ -350,10 +350,124 @@
   width: auto;
 }
 
+.body-text figcaption {
+  font-size: 1.25rem;
+}
+
 /* -------------------------------------------------------------------------- */
 
-.layout-clamp {
+.ssod-layout-clamp {
+  margin: 0 auto;
   max-width: 100rem;
   padding: 0 5vw;
   width: 100%;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-layout-sidebar {
+  align-items: start;
+  display: grid;
+  grid-gap: var(--space-7);
+  grid-template-columns: [major] minmax(0, 2fr) [minor] minmax(0, 1fr);
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-event-list-upcoming {
+  box-shadow: var(--shadow-1);
+}
+
+.ssod-event-list-upcoming h2 {
+  background-color: var(--color-mood);
+  color: var(--color-mood-dark);
+  font-size: 3rem;
+  padding: var(--space-4) var(--space-6);
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-post-summary + .ssod-post-summary {
+  margin-top: calc(var(--space-7) * 2);
+}
+
+.ssod-post-summary header {
+  color: var(--color-mood-dark);
+  font-weight: bold;
+}
+
+.ssod-post-summary h2 {
+  font-size: 3rem;
+  margin-bottom: var(--space-5);
+  letter-spacing: -.075rem;
+}
+
+.ssod-post-summary h2 a {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  transition: all .4s;
+}
+
+.ssod-post-summary h2 a::before {
+  content: '';
+  display: block;
+  height: 3.33rem;
+  left: -1rem;
+  position: absolute;
+  transition: all .4s;
+  width: calc(100% + 2rem);
+}
+
+.ssod-post-summary h2 span {
+  position: relative;
+}
+
+.ssod-post-summary h2 a:focus::before,
+.ssod-post-summary h2 a:hover::before {
+  background-color: var(--color-mood);
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-post-meta {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 6rem auto;
+  grid-gap: var(--space-6);
+  margin-bottom: var(--space-5);
+}
+
+.ssod-post-meta .avatar-wrap {
+  border: .5rem solid transparent;
+  border-left-color: var(--color-mood);
+  border-radius: 50%;
+  border-right-color: var(--color-mood);
+}
+
+.ssod-post-meta .avatar {
+  border-radius: 50%;
+  border: .5rem solid transparent;
+  box-sizing: content-box;
+  filter: grayscale(1);
+  height: 4rem;
+  width: 4rem;
+}
+
+.ssod-post-meta .author-title {
+  color: var(--color-mood-dark);
+  display: block;
+  font-weight: bold;
+}
+
+.ssod-post-meta .author-name {
+  display: block;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-excerpt {
+  font-size: 1.25rem;
+  line-height: 2;
+  max-width: 60rem;
 }

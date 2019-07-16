@@ -24,7 +24,7 @@ if ( ! isset( $content_width ) ) {
 if ( function_exists( 'add_theme_support' ) ) {
 
     // Add Thumbnail Theme Support.
-    add_theme_support( 'post-thumbnails' );
+    // add_theme_support( 'post-thumbnails' );
     add_image_size( 'large', 700, '', true ); // Large Thumbnail.
     add_image_size( 'medium', 250, '', true ); // Medium Thumbnail.
     add_image_size( 'small', 120, '', true ); // Small Thumbnail.
@@ -201,19 +201,18 @@ function html5wp_pagination() {
     ) );
 }
 
-// Create 20 Word Callback for Index page Excerpts, call using html5wp_excerpt('html5wp_index');
-function html5wp_index( $length ) {
-    return 20;
+// Create 20 Word Callback for Index page Excerpts, call using ssod_excerpt('ssod_index');
+function ssod_index( $length ) {
+    return 60;
 }
 
-// Create 40 Word Callback for Custom Post Excerpts, call using html5wp_excerpt('html5wp_custom_post');
-function html5wp_custom_post( $length ) {
+// Create 40 Word Callback for Custom Post Excerpts, call using ssod_excerpt('ssod_custom_post');
+function ssod_custom_post( $length ) {
     return 40;
 }
 
 // Create the Custom Excerpts callback
-function html5wp_excerpt( $length_callback = '', $more_callback = '' ) {
-    global $post;
+function ssod_excerpt( $length_callback = '', $more_callback = '', $id = null ) {
     if ( function_exists( $length_callback ) ) {
         add_filter( 'excerpt_length', $length_callback );
     }
@@ -223,8 +222,7 @@ function html5wp_excerpt( $length_callback = '', $more_callback = '' ) {
     $output = get_the_excerpt();
     $output = apply_filters( 'wptexturize', $output );
     $output = apply_filters( 'convert_chars', $output );
-    $output = '<p>' . $output . '</p>';
-    echo esc_html( $output );
+    echo ( $output );
 }
 
 // Custom View Article link to Post
