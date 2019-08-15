@@ -2,14 +2,6 @@
 
 	<div class="ssod-post-summary">
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-			<header>
-				Publisert 
-				<span class="date">
-					<time datetime="<?php the_time( 'Y-m-d' ); ?> <?php the_time( 'H:i' ); ?>">
-						<?php the_date(); ?>
-					</time>
-				</span>
-			</header>
 			<h2>
 				<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
 					<span><?php the_title(); ?></span>
@@ -20,9 +12,15 @@
 				<span class="avatar-wrap">
 					<?php echo get_avatar( get_the_author_meta( 'ID' ), 128 ); ?>
 				</span>
-				<div class="author">
-					<span class="author-title">Skrevet av</span>
-					<span class="author-name"><?php the_author(); ?></span>
+				<div class="meta">
+					<span class="meta-title">Skrevet av</span>
+					<span class="meta-value"><?php the_author(); ?></span>
+				</div>
+				<div class="meta">
+					<span class="meta-title">Publisert</span>
+					<time class="meta-value" datetime="<?php the_time( 'Y-m-d' ); ?> <?php the_time( 'H:i' ); ?>">
+						<?php the_date(); ?>
+					</time>
 				</div>
 			</div>
 

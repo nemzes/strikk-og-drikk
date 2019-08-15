@@ -357,9 +357,10 @@
 /* -------------------------------------------------------------------------- */
 
 .ssod-layout-clamp {
+  --ssod-layout-padding: 5vw;
   margin: 0 auto;
   max-width: 100rem;
-  padding: 0 5vw;
+  padding: 0 var(--ssod-layout-padding);
   width: 100%;
 }
 
@@ -369,19 +370,23 @@
   align-items: start;
   display: grid;
   grid-gap: var(--space-7);
-  grid-template-columns: [major] minmax(0, 2fr) [minor] minmax(0, 1fr);
+  /* grid-template-columns: [major] minmax(0, 2fr) [minor] minmax(0, 1fr); */
+  grid-template-columns: minmax(0, 2fr) minmax(0, 2fr);
 }
 
 /* -------------------------------------------------------------------------- */
 
 .ssod-event-list-upcoming {
-  box-shadow: var(--shadow-1);
+  align-self: stretch;
+  background-color: var(--color-background-text);
+  box-shadow: 0rem 0rem 2rem 0rem rgba(0, 0, 0, .25);
+  margin-right: calc(-1 * var(--ssod-layout-padding));
 }
 
 .ssod-event-list-upcoming h2 {
-  background-color: var(--color-mood);
+  border-top: var(--space-5) solid var(--color-mood);
   color: var(--color-mood-dark);
-  font-size: 3rem;
+  font-size: 2.5rem;
   padding: var(--space-4) var(--space-6);
 }
 
@@ -389,11 +394,6 @@
 
 .ssod-post-summary + .ssod-post-summary {
   margin-top: calc(var(--space-7) * 2);
-}
-
-.ssod-post-summary header {
-  color: var(--color-mood-dark);
-  font-weight: bold;
 }
 
 .ssod-post-summary h2 {
@@ -433,7 +433,7 @@
 .ssod-post-meta {
   align-items: center;
   display: grid;
-  grid-template-columns: 6rem auto;
+  grid-template-columns: 6rem 8rem 8rem;
   grid-gap: var(--space-6);
   margin-bottom: var(--space-5);
 }
@@ -454,13 +454,13 @@
   width: 4rem;
 }
 
-.ssod-post-meta .author-title {
+.ssod-post-meta .meta-title {
   color: var(--color-mood-dark);
   display: block;
   font-weight: bold;
 }
 
-.ssod-post-meta .author-name {
+.ssod-post-meta .meta-value {
   display: block;
 }
 
