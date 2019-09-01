@@ -21,19 +21,23 @@
 		<div class="site">
 
 			<!-- header -->
-			<header class="global-header clear" role="banner">
+			<header class="global-header" role="banner">
 
 				<div class="ssod-layout-clamp">
-					<div class="site-logo">
-						<a href="<?php echo esc_url( home_url() ); ?>">
-							<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/logo-small.svg" alt="Logo">
-						</a>
-					</div>
+					<div class="global-header--wrap">
+						<div class="site-logo">
+							<a href="<?php echo esc_url( home_url() ); ?>">
+								<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/logo-small.svg" alt="Logo">
+							</a>
+						</div>
 
-					<nav class="global-nav" role="navigation">
-						<ul>
-						</ul>
-					</nav>
+						<nav class="global-nav" role="navigation">
+							<ul>
+							</ul>
+						</nav>
+
+						<?php get_template_part( 'searchform' ); ?>
+					</div>
 				</div>
 
 

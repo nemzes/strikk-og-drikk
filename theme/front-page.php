@@ -58,7 +58,10 @@
         <?php get_template_part('loop'); ?>
         <?php get_template_part('pagination'); ?>
       </section>
-      <?php get_template_part('events'); ?>
+      <section class="ssod-event-list-upcoming">
+        <h2>Hva skjer?</h2>
+        <?php get_template_part('events'); ?>
+      </section>
     </div>
   </div>
 </main>

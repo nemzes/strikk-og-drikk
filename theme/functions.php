@@ -201,14 +201,18 @@ function html5wp_pagination() {
     ) );
 }
 
-// Create 20 Word Callback for Index page Excerpts, call using ssod_excerpt('ssod_index');
-function ssod_index( $length ) {
+// Create 20 Word Callback for Index page Excerpts, call using ssod_excerpt('ssod_excerpt_len_index');
+function ssod_excerpt_len_index( $length ) {
     return 60;
 }
 
-// Create 40 Word Callback for Custom Post Excerpts, call using ssod_excerpt('ssod_custom_post');
-function ssod_custom_post( $length ) {
-    return 40;
+// Create 40 Word Callback for Event Excerpts, call using ssod_excerpt('ssod_excerpt_len_event');
+function ssod_excerpt_len_event( $length ) {
+    return 10;
+}
+
+function ssod_excerpt_more_none() {
+    return '…';
 }
 
 // Create the Custom Excerpts callback
@@ -228,7 +232,7 @@ function ssod_excerpt( $length_callback = '', $more_callback = '', $id = null ) 
 // Custom View Article link to Post
 function html5_blank_view_article( $more ) {
     global $post;
-    return '... <a class="view-article" href="' . get_permalink( $post->ID ) . '">' . esc_html( 'View Article', 'html5blank' ) . '</a>';
+    return '… <a class="view-article" href="' . get_permalink( $post->ID ) . '">' . esc_html( 'View Article', 'html5blank' ) . '</a>';
 }
 
 // Remove Admin bar

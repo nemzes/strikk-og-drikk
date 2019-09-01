@@ -25,7 +25,7 @@
 			</div>
 
 			<div class="ssod-excerpt">
-				<?php ssod_excerpt( 'ssod_index' ); ?>
+				<?php ssod_excerpt( 'ssod_excerpt_len_index' ); ?>
 			</div>
 
 			<?php edit_post_link(); ?>
