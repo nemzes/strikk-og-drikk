@@ -1,8 +1,6 @@
 <!-- search -->
-<form class="search" method="get" action="<?php echo esc_url( home_url() ); ?>">
-	<div role="search">
-		<input class="search-input" type="search" name="s" aria-label="Search site for:" placeholder="<?php esc_html( 'To search, type and hit enter.', 'html5blank' ); ?>">
-		<button class="search-submit" type="submit"><?php esc_html( 'Search', 'html5blank' ); ?></button>
-	</div>
+<form class="ssod-search" method="get" role="search" action="<?php echo esc_url( home_url() ); ?>">
+	<input class="ssod-search_input" type="search" name="s" placeholder="Søk for…">
+	<button class="ssod-search_submit" type="submit">Søk</button>
 </form>
 <!-- /search -->

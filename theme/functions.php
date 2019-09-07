@@ -104,14 +104,6 @@ function html5blank_styles() {
     wp_enqueue_style( 'sogd-objects' );
 }
 
-// Register HTML5 Blank Navigation
-function register_html5_menu() {
-    register_nav_menus( array( // Using array to specify more menus if needed
-        'header-menu'  => esc_html( 'Header Menu', 'html5blank' ), // Main Navigation
-        'extra-menu'   => esc_html( 'Extra Menu', 'html5blank' ) // Extra Navigation if needed (duplicate as many as you need!)
-    ) );
-}
-
 // Remove the <div> surrounding the dynamic navigation to cleanup markup
 function my_wp_nav_menu_args( $args = '' ) {
     $args['container'] = false;
@@ -319,10 +311,11 @@ add_action( 'wp_enqueue_scripts', 'html5blank_header_scripts' ); // Add Custom S
 add_action( 'wp_print_scripts', 'html5blank_conditional_scripts' ); // Add Conditional Page Scripts
 add_action( 'get_header', 'enable_threaded_comments' ); // Enable Threaded Comments
 add_action( 'wp_enqueue_scripts', 'html5blank_styles' ); // Add Theme Stylesheet
-add_action( 'init', 'register_html5_menu' ); // Add HTML5 Blank Menu
 add_action( 'widgets_init', 'my_remove_recent_comments_style' ); // Remove inline Recent Comment Styles from wp_head()
 add_action( 'init', 'html5wp_pagination' ); // Add our HTML5 Pagination
-add_action('get_header', 'remove_admin_login_header');
+add_action( 'init', 'sogd_register_menu' );
+add_action( 'get_header', 'remove_admin_login_header' );
+
 function remove_admin_login_header() {
 	remove_action('wp_head', '_admin_bar_bump_cb');
 }
@@ -363,6 +356,11 @@ add_shortcode( 'html5_shortcode_demo_2', 'html5_shortcode_demo_2' ); // Place [h
 
 // Shortcodes above would be nested like this -
 // [html5_shortcode_demo] [html5_shortcode_demo_2] Here's the page title! [/html5_shortcode_demo_2] [/html5_shortcode_demo]
+
+
+function sogd_register_menu() {
+  register_nav_menu('global-nav', __( 'Global navigation' ));
+}
 
 // ---
 

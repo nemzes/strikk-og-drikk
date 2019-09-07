@@ -31,9 +31,8 @@
 							</a>
 						</div>
 
-						<nav class="global-nav" role="navigation">
-							<ul>
-							</ul>
+						<nav class="ssod-global-nav" role="navigation">
+							<?php wp_nav_menu( array( 'theme_location' => 'global-nav' ) ); ?>
 						</nav>
 
 						<?php get_template_part( 'searchform' ); ?>
