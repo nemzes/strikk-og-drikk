@@ -26,14 +26,28 @@ function sogd_change_permalinks() {
 // ----------------------------------------------------------------------------
 
 add_action('admin_init', 'sogd_register_settings');
+add_action('admin_init', 'sogd_check_dependencies');
 
-function sogd_register_settings()
-{
+function sogd_register_settings() {
     register_setting('sogd-settings', 'sogd-festival-enabled');
     register_setting('sogd-settings', 'sogd-festival-current');
 
     register_setting('sogd-settings', 'sogd-front-title');
     register_setting('sogd-settings', 'sogd-front-blurb');
+}
+
+function sogd_check_dependencies() {
+    if (!is_plugin_active('event-organiser/event-organiser.php')) {
+        add_action( 'admin_notices', 'sogd_add_notice_dep_event_organiser' );
+    }
+}
+
+function sogd_add_notice_dep_event_organiser() {
+    ?>
+    <div class="notice notice-error">
+        <p>S&D: The Event Organiser plugin is not active!</p>
+    </div>
+    <?php
 }
 
 // ----------------------------------------------------------------------------

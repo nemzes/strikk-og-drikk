@@ -603,6 +603,10 @@
   font-weight: bold;
 }
 
+.ssod-search_input:focus::placeholder {
+  color: transparent;
+}
+
 .ssod-search_submit {
   -webkit-appearance: none;
   background-color: hsla(var(--hsl-mood), .5);
