@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<main role="main" aria-label="Content">
+<main role="main" aria-label="Content" class="ssod-main">
   <?php if (get_option('sogd-festival-enabled')) : ?>
     <?php $sogd_festival_id = get_option('sogd-festival-current'); ?>
     <?php $sogd_festival_current = get_post($sogd_festival_id); ?>
@@ -58,11 +58,16 @@
         <?php get_template_part('loop'); ?>
         <?php get_template_part('pagination'); ?>
       </section>
-      <section class="ssod-event-list-upcoming">
+      <section class="ssod-front-sidebar">
         <h2>Hva skjer?</h2>
         <?php get_template_part('events'); ?>
+
+        <?php if (is_active_sidebar('ssod-widgets-front-page')) : ?>
+          <?php dynamic_sidebar('ssod-widgets-front-page'); ?>
+        <?php endif; ?>
+
       </section>
-    </div>
+    </div
   </div>
 </main>
 

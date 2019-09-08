@@ -146,31 +146,29 @@ function remove_width_attribute( $html ) {
 
 // If Dynamic Sidebar Exists
 if ( function_exists( 'register_sidebar' ) ) {
-    // Define Sidebar Widget Area 1
     register_sidebar( array(
-        'name'          => esc_html( 'Widget Area 1', 'html5blank' ),
-        'description'   => esc_html( 'Description for this widget-area...', 'html5blank' ),
-        'id'            => 'widget-area-1',
+        'name'          => 'Front page widgets',
+        'description'   => 'Displayed below the event list',
+        'id'            => 'ssod-widgets-front-page',
         'before_widget' => '<div id="%1$s" class="%2$s">',
         'after_widget'  => '</div>',
-        'before_title'  => '<h3>',
-        'after_title'   => '</h3>',
+        'before_title'  => '<h2>',
+        'after_title'   => '</h2>',
     ) );
 
-    // Define Sidebar Widget Area 2
     register_sidebar( array(
-        'name'          => esc_html( 'Widget Area 2', 'html5blank' ),
-        'description'   => esc_html( 'Description for this widget-area...', 'html5blank' ),
-        'id'            => 'widget-area-2',
+        'name'          => 'Footer widgets',
+        'description'   => 'Displayed in footer in all pages',
+        'id'            => 'ssod-widgets-footer',
         'before_widget' => '<div id="%1$s" class="%2$s">',
         'after_widget'  => '</div>',
-        'before_title'  => '<h3>',
-        'after_title'   => '</h3>',
+        'before_title'  => '<h2>',
+        'after_title'   => '</h2>',
     ) );
 }
 
 // Remove wp_head() injected Recent Comment styles
-function my_remove_recent_comments_style() {
+function ssod_remove_recent_comments_style() {
     global $wp_widget_factory;
 
     if ( isset( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'] ) ) {
@@ -311,7 +309,7 @@ add_action( 'wp_enqueue_scripts', 'html5blank_header_scripts' ); // Add Custom S
 add_action( 'wp_print_scripts', 'html5blank_conditional_scripts' ); // Add Conditional Page Scripts
 add_action( 'get_header', 'enable_threaded_comments' ); // Enable Threaded Comments
 add_action( 'wp_enqueue_scripts', 'html5blank_styles' ); // Add Theme Stylesheet
-add_action( 'widgets_init', 'my_remove_recent_comments_style' ); // Remove inline Recent Comment Styles from wp_head()
+add_action( 'widgets_init', 'ssod_remove_recent_comments_style' ); // Remove inline Recent Comment Styles from wp_head()
 add_action( 'init', 'html5wp_pagination' ); // Add our HTML5 Pagination
 add_action( 'init', 'sogd_register_menu' );
 add_action( 'get_header', 'remove_admin_login_header' );

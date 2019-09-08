@@ -18,7 +18,7 @@
 	<body <?php body_class(); ?>>
 
 		<!-- wrapper -->
-		<div class="site">
+		<div class="ssod-site">
 
 			<!-- header -->
 			<header class="global-header" role="banner">

@@ -8,7 +8,7 @@
     $extra_class = $is_festival_post ? 'singular--festival' : '';
     ?>
 
-  <main role="main" aria-label="Content" class="singular <?php echo $extra_class ?>">
+  <main role="main" aria-label="Content" class="ssod-main singular <?php echo $extra_class ?>">
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
       <?php if ($is_festival_post) : ?>

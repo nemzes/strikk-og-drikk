@@ -1,11 +1,14 @@
-.site {
+.ssod-site {
   background: var(--color-background);
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   overflow: auto;
   padding-top: var(--header-height);
 }
 
-.site .global-header {
+.ssod-site .global-header {
+  flex: 0 0 auto;
   left: 0;
   position: fixed;
   top: 0;
@@ -13,11 +16,19 @@
   z-index: 2;
 }
 
-.admin-bar .site {
+.ssod-site .ssod-main {
+  flex: 1 1 auto;
+}
+
+.ssod-side .ssod-footer {
+  flex: 0 0 auto;
+}
+
+.admin-bar .ssod-site {
   padding-top: calc(var(--header-height) + 32px);
 }
 
-.admin-bar .site .global-header {
+.admin-bar .ssod-site .global-header {
   top: 32px;
 }
 
@@ -201,6 +212,7 @@
 
 .festival-hero + .hero {
   background-color: var(--color-brand);
+  background-image: none;
 }
 
 .festival-hero + .hero .hero__layout > svg {
@@ -209,6 +221,7 @@
 
 .festival-hero + .hero .hero__text > h1 {
   color: var(--color-mood);
+  text-shadow: none;
 }
 
 .festival-hero + .hero .hero__blurb {
@@ -392,7 +405,7 @@
 
 /* -------------------------------------------------------------------------- */
 
-.ssod-event-list-upcoming {
+.ssod-front-sidebar {
   align-self: stretch;
   background-color: var(--color-background-text);
   border-top: var(--space-5) solid var(--color-brand);
@@ -401,7 +414,7 @@
   padding: var(--space-5) var(--space-6);
 }
 
-.ssod-event-list-upcoming h2 {
+.ssod-front-sidebar h2 {
   color: var(--color-mood-dark);
   font-size: 2.5rem;
   padding: var(--space-4) 0 var(--space-7) 0;
@@ -648,4 +661,12 @@
   background-color: var(--color-mood);
   color: var(--color-brand);
   outline: none;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-footer {
+  background-color: var(--color-mood);
+  margin-top: var(--space-7);
+  padding: var(--space-7) 0 var(--space-5) 0;
 }
