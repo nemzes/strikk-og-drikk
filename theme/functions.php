@@ -59,6 +59,13 @@ if ( function_exists( 'add_theme_support' ) ) {
     load_theme_textdomain( 'html5blank', get_template_directory() . '/languages' );
 }
 
+function ssod_disable_event_organiser_css($options) {
+    $options['disable_css'] = 1;
+    return $options;
+}
+
+add_filter('eventorganiser_options', 'ssod_disable_event_organiser_css');
+
 /*------------------------------------*\
     Functions
 \*------------------------------------*/

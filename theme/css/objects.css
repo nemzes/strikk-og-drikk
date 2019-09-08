@@ -234,20 +234,20 @@
   background-color: var(--color-background-text);
 }
 
+.singular::after {
+  content: url('../img/logo-small.inverted.svg');
+  display: block;
+  height: 4rem;
+  margin: 0 auto var(--space-7) auto;
+  width: 4rem;
+}
+
 .singular__content {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   max-width: 60rem;
   padding: var(--space-7) var(--space-7) var(--space-6) var(--space-7);
-}
-
-.singular__content::after {
-  content: url('../img/logo-small.inverted.svg');
-  display: block;
-  height: 4rem;
-  margin: var(--space-5) auto;
-  width: 4rem;
 }
 
 .singular__header h1 {
@@ -391,6 +391,11 @@
   max-width: 100rem;
   padding: 0 var(--ssod-layout-padding);
   width: 100%;
+}
+
+.ssod-layout-clamp--content {
+  max-width: 60rem;
+  padding: 0 var(--space-7);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -669,4 +674,58 @@
   background-color: var(--color-mood);
   margin-top: var(--space-7);
   padding: var(--space-7) 0 var(--space-5) 0;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-event-banner {
+  background-color: var(--color-mood);
+  border-top: var(--space-4) solid var(--color-mood-dark);
+  margin: calc(-1 * var(--space-5)) 0;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.5rem;
+  justify-content: space-between;
+  padding: var(--space-6) 0;
+}
+
+.ssod-event-meta__upcoming {
+  display: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.ssod-event-meta__upcoming li {
+  display: block;
+  margin: var(--space-5) 0;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-event-map {
+  border-top: var(--space-4) solid var(--color-background);
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-button-link {
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: none;
+  color: var(--color-brand);
+  cursor: pointer;
+  display: inline;
+  padding: 0;
+}
+
+.ssod-button-link:focus,
+.ssod-button-link:hover {
+  outline: none;
+  text-decoration: underline;
 }

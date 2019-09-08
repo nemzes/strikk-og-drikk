@@ -6,7 +6,7 @@
     $festival = sogd_get_post_festival(get_the_ID());
     $is_festival_post = !!$festival;
     $extra_class = $is_festival_post ? 'singular--festival' : '';
-    ?>
+  ?>
 
   <main role="main" aria-label="Content" class="ssod-main singular <?php echo $extra_class ?>">
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -55,7 +55,5 @@
   </main>
 
 <?php endif; ?>
-
-<?php get_sidebar(); ?>
 
 <?php get_footer();
