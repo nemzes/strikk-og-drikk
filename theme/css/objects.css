@@ -313,6 +313,61 @@
 
 /* -------------------------------------------------------------------------- */
 
+.ssod-listing {
+  background-color: var(--color-background-text);
+}
+
+.ssod-listing__content {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 60rem;
+  padding: var(--space-7) var(--space-7) var(--space-6) var(--space-7);
+}
+
+.ssod-listing__header h1 {
+  color: var(--color-brand);
+  font-size: 4rem;
+  letter-spacing: -.05em;
+  line-height: 1;
+  margin-bottom: var(--space-6);
+  hyphens: auto;
+}
+
+.ssod-listing__header::after {
+  content: url('../img/yarn-ball.svg');
+  display: block;
+  height: 4rem;
+  margin: var(--space-7) auto var(--space-8) auto;
+  width: 4rem;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-listing--festival {
+  background-clip: padding-box;
+  background-image: var(--background-image-festival-subtle);
+  background-repeat: repeat;
+}
+
+.ssod-listing--festival a {
+  color: var(--color-festival-text);
+}
+
+.ssod-listing--festival .ssod-listing__header {
+  text-align: center;
+}
+
+.ssod-listing--festival .ssod-listing__header h1 {
+  color: var(--color-festival-text);
+}
+
+.ssod-listing--festival .ssod-listing__content {
+  background-color: hsla(var(--hsl-background-text), .5);
+}
+
+/* -------------------------------------------------------------------------- */
+
 .festival-header {
   background-color: var(--color-festival);
   background-clip: padding-box;
@@ -699,6 +754,10 @@
   margin: 0;
   padding: 0;
   width: 100%;
+}
+
+.ssod-event-meta__upcoming--visible {
+  display: block;
 }
 
 .ssod-event-meta__upcoming li {

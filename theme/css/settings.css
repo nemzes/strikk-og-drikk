@@ -31,6 +31,7 @@
   --space-5: 1rem;
   --space-6: 2rem;
   --space-7: 3rem;
+  --space-8: 5rem;
 
   --shadow-1: 0 var(--space-2) var(--space-4) var(--space-2) rgba(0, 0, 0, 0.25);
 

@@ -1,10 +1,10 @@
-(function( root, $, undefined ) {
-  'use strict';
-
-  $(function () {
-    $('#ssod_event_dates_toggler').on('click', function(ev) {
-      $('#ssod_event_dates').toggle();
+(function() {
+  function $(id) {
+    return document.getElementById(id);
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    $("ssod_event_dates_toggler").addEventListener("click", function() {
+      $("ssod_event_dates").classList.toggle("ssod-event-meta__upcoming--visible");
     });
   });
-
-} ( this, jQuery ));
+})();

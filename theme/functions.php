@@ -71,26 +71,17 @@ add_filter('eventorganiser_options', 'ssod_disable_event_organiser_css');
 \*------------------------------------*/
 
 // Load HTML5 Blank scripts (header.php)
-function html5blank_header_scripts() {
+function ssod_scripts() {
     if ( $GLOBALS['pagenow'] != 'wp-login.php' && ! is_admin() ) {
         // Custom scripts
         wp_register_script(
-            'html5blankscripts',
+            'ssod_scripts',
             get_template_directory_uri() . '/js/scripts.js',
             array(),
             '1.0.0' );
 
         // Enqueue Scripts
-        wp_enqueue_script( 'html5blankscripts' );
-    }
-}
-
-// Load HTML5 Blank conditional scripts
-function html5blank_conditional_scripts() {
-    if ( is_page( 'pagenamehere' ) ) {
-        // Conditional script(s)
-        wp_register_script( 'scriptname', get_template_directory_uri() . '/js/scriptname.js', array( 'jquery' ), '1.0.0' );
-        wp_enqueue_script( 'scriptname' );
+        wp_enqueue_script( 'ssod_scripts' );
     }
 }
 
@@ -312,8 +303,7 @@ function html5blankcomments( $comment, $args, $depth ) {
 \*------------------------------------*/
 
 // Add Actions
-add_action( 'wp_enqueue_scripts', 'html5blank_header_scripts' ); // Add Custom Scripts to wp_head
-add_action( 'wp_print_scripts', 'html5blank_conditional_scripts' ); // Add Conditional Page Scripts
+add_action( 'wp_enqueue_scripts', 'ssod_scripts' ); // Add Custom Scripts to wp_head
 add_action( 'get_header', 'enable_threaded_comments' ); // Enable Threaded Comments
 add_action( 'wp_enqueue_scripts', 'html5blank_styles' ); // Add Theme Stylesheet
 add_action( 'widgets_init', 'ssod_remove_recent_comments_style' ); // Remove inline Recent Comment Styles from wp_head()
@@ -369,46 +359,37 @@ function sogd_register_menu() {
 
 // ---
 
-function sogd_is_festival_post($post_id) {
-    $festivals = get_posts([
-        'post_type' => 'festival',
+function sogd_get_festivals() {
+    return get_posts([
+        'post_type' => 'sogd-festival',
         'post_status' => 'publish',
         'numberposts' => -1
     ]);
+}
 
-    $post_cats = get_the_category($post_id);
+function sogd_get_category_festival($cat_id) {
+    $festivals = sogd_get_festivals();
+    $cat_parents = get_ancestors($cat_id, 'category');
 
-    if (!empty($post_cats)) {
-        foreach ($post_cats as $post_cat) {
-            $post_cat_id = $post_cat->term_id;
-            $post_cat_parents = get_ancestors($post_cat, 'category');
+    if (!empty($cat_parents)) {
+        foreach ($festivals as $festival) {
+            $festival_parent_cat = sogd_get_festival_parent_cat($festival);
 
-            foreach ($festivals as $festival) {
-                $festival_cats = get_the_category($festival->ID);
-
-                foreach ($festival_cats as $festival_cat) {
-                    if ($post_cat_id === $festival_cat->term_id) {
-                        return true;
-                    }
-
-                    if (in_array($festival_cat, $post_cat_parents)) {
-                        return true;
-                    }
-                }
+            if ($cat_id === $festival_parent_cat) {
+                return $festival;
             }
-        }    
+
+            if (in_array($festival_parent_cat, $cat_parents)) {
+                return $festival;
+            }
+        }
     }
 
     return false;
 }
 
 function sogd_get_post_festival($post_id) {
-    $festivals = get_posts([
-        'post_type' => 'sogd-festival',
-        'post_status' => 'publish',
-        'numberposts' => -1
-    ]);
-
+    $festivals = sogd_get_festivals();
     $post_cats = get_the_category($post_id);
 
     if (!empty($post_cats)) {
