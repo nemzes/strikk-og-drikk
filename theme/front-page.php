@@ -55,8 +55,21 @@
   <div class="ssod-layout-clamp">
     <div class="ssod-layout-sidebar">
       <section>
-        <?php get_template_part('loop'); ?>
-        <?php get_template_part('pagination'); ?>
+        <?php
+          $festival_parent_cats = sogd_get_all_festivals_parent_cats();
+          $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+          $args = array(
+            'cat' => array_map(function ($cat) { return "-$cat"; }, $festival_parent_cats),
+            'paged' => $paged,
+          );
+
+          query_posts($args);
+          get_template_part('loop');
+          wp_reset_query();
+        ?>
+        <p class="ssod-standout-text">
+          <a href="/arkiv/">Vis hele arkivet</a>
+        </p>
       </section>
       <section class="ssod-front-sidebar">
         <h2>Hva skjer?</h2>

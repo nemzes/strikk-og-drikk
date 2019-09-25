@@ -3,7 +3,7 @@
 <?php if (have_posts()) : the_post(); ?>
 
   <?php
-    $festival = sogd_get_post_festival(get_the_ID());
+    $festival = sogd_get_event_festival(get_the_ID());
     $is_festival_post = !!$festival;
     $extra_class = $is_festival_post ? 'singular--festival' : '';
   ?>

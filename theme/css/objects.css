@@ -4,14 +4,14 @@
   flex-direction: column;
   height: 100vh;
   overflow: auto;
-  padding-top: var(--header-height);
+  padding-top: 0;
 }
 
 .ssod-site .global-header {
   flex: 0 0 auto;
   left: 0;
-  position: fixed;
-  top: 0;
+  position: sticky;
+  top: calc(-1 * var(--header-height));
   width: 100%;
   z-index: 2;
 }
@@ -25,11 +25,7 @@
 }
 
 .admin-bar .ssod-site {
-  padding-top: calc(var(--header-height) + 32px);
-}
-
-.admin-bar .ssod-site .global-header {
-  top: 32px;
+  padding-top: 32px;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -328,10 +324,11 @@
 .ssod-listing__header h1 {
   color: var(--color-brand);
   font-size: 4rem;
+  hyphens: auto;
   letter-spacing: -.05em;
   line-height: 1;
   margin-bottom: var(--space-6);
-  hyphens: auto;
+  text-align: center;
 }
 
 .ssod-listing__header::after {
@@ -537,6 +534,10 @@
 
 /* -------------------------------------------------------------------------- */
 
+.ssod-post-summary {
+  position: relative;
+}
+
 .ssod-post-summary + .ssod-post-summary {
   margin-top: calc(var(--space-7) * 2);
 }
@@ -571,6 +572,25 @@
 .ssod-post-summary h2 a:focus::before,
 .ssod-post-summary h2 a:hover::before {
   background-color: var(--color-mood);
+}
+
+.ssod-post-summary .post-edit-link {
+  background: var(--color-background-text);
+  border-radius: var(--space-6);
+  bottom: 0;
+  box-shadow: var(--shadow-1);
+  opacity: 0;
+  padding: var(--space-5) var(--space-6);
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  transition: all .4s;
+}
+
+.post-edit-link:focus,
+.ssod-post-summary:hover .post-edit-link {
+  opacity: 1;
+  pointer-events: all;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -729,6 +749,14 @@
   background-color: var(--color-mood);
   margin-top: var(--space-7);
   padding: var(--space-7) 0 var(--space-5) 0;
+  position: relative;
+}
+
+.ssod-footer__pi {
+  bottom: 0;
+  position: absolute;
+  right: var(--space-2);
+  text-decoration: none;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -736,7 +764,7 @@
 .ssod-event-banner {
   background-color: var(--color-mood);
   border-top: var(--space-4) solid var(--color-mood-dark);
-  margin: calc(-1 * var(--space-5)) 0;
+  margin: calc(-1 * var(--space-5)) 0 0 0;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -773,6 +801,16 @@
 
 /* -------------------------------------------------------------------------- */
 
+.ssod-standout-text {
+  border-top: var(--space-3) solid var(--color-mood-dark);
+  font-size: 1.5rem;
+  margin: var(--space-6) 0 var(--space-5) 0;
+  padding-top: var(--space-6);
+  text-align: center;
+}
+
+/* -------------------------------------------------------------------------- */
+
 .ssod-button-link {
   -webkit-appearance: none;
   background-color: transparent;
@@ -787,4 +825,50 @@
 .ssod-button-link:hover {
   outline: none;
   text-decoration: underline;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-view-article {
+  font-weight: bold;
+  padding: var(--space-3) var(--space-4);
+  text-decoration: none;
+  transition: all .4s;
+}
+
+.ssod-view-article:focus,
+.ssod-post-summary:hover .ssod-view-article {
+  background-color: var(--color-mood);
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-pagination .page-numbers {
+  align-items: center;
+  background-color: var(--color-mood);
+  display: inline-flex;
+  height: var(--space-7);
+  justify-content: center;
+  min-width: var(--space-7);
+  padding: var(--space-3) var(--space-4);
+  text-decoration: none;
+}
+
+.ssod-pagination .dots {
+  background-color: transparent;
+}
+
+.ssod-pagination .current {
+  background-color: var(--color-mood-dark);
+  color: var(--color-background-text);
+}
+
+.ssod-pagination .prev::before {
+  content: '<';
+  margin-right: var(--space-3);
+}
+
+.ssod-pagination .next::after {
+  content: '>';
+  margin-left: var(--space-3);
 }

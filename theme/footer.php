@@ -10,6 +10,7 @@
           <?php endif; ?>
           <?php wp_footer(); ?>
         </div>
+        <a href="/wp-admin" class="ssod-footer__pi">&pi;</a>
       </footer>
     </div>
   </body>
