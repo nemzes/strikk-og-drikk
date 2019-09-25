@@ -15,6 +15,35 @@ require_once('post-speaker.php');
 
 // ----------------------------------------------------------------------------
 
+add_filter('allowed_block_types', 'sogd_allowed_blocks', 10, 2);
+
+function sogd_allowed_blocks($allowed_block_types, $post) {
+    if (!in_array($post->post_type, array(
+      'sogd-festival',
+      'sogd-speaker',
+      'post',
+      'page',
+    ))) {
+        return $allowed_block_types;
+    }
+    
+    return array(
+        'core/gallery',
+        'core/heading',
+        'core/image',
+        'core/list',
+        'core/paragraph',
+        'core/separator',
+        'core/shortcode',
+        'core-embed/facebook',
+        'core-embed/instagram',
+        'core-embed/twitter',
+        'core-embed/youtube',
+    );
+}
+
+// ----------------------------------------------------------------------------
+
 add_action('init', 'sogd_change_permalinks');
 add_action('init', 'sogd_create_archive_page');
 

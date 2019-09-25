@@ -38,30 +38,6 @@ function sogd_post_festival_create() {
 
 // ----------------------------------------------------------------------------
 
-add_filter( 'allowed_block_types', 'sogd_post_festival_allowed_blocks', 10, 2 );
-
-function sogd_post_festival_allowed_blocks( $allowed_block_types, $post ) {
-    if ( $post->post_type !== 'sogd-festival' ) {
-        return $allowed_block_types;
-    }
-    
-    return array(
-        'core/gallery',
-        'core/heading',
-        'core/image',
-        'core/list',
-        'core/paragraph',
-        'core/separator',
-        'core/shortcode',
-        'core-embed/facebook',
-        'core-embed/instagram',
-        'core-embed/twitter',
-        'core-embed/youtube',
-    );
-}
-
-// ----------------------------------------------------------------------------
-
 add_action( 'add_meta_boxes', 'sogd_post_festival_config_meta_box' );
 
 function sogd_post_festival_config_meta_box() {

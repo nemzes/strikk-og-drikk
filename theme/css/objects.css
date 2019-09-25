@@ -421,7 +421,8 @@
   margin: 2em 0;
 }
 
-.body-text img {
+.body-text p img,
+.body-text .wp-block-image img {
   border: var(--space-3) solid var(--color-mood);
   box-sizing: content-box;
   display: block;

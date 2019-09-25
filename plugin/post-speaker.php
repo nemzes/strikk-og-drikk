@@ -54,29 +54,6 @@ function sogd_post_speaker_show_in_category( $query ) {
 
 // ----------------------------------------------------------------------------
 
-add_filter( 'allowed_block_types', 'sogd_post_speaker_allowed_blocks', 10, 2 );
-
-function sogd_post_speaker_allowed_blocks( $allowed_block_types, $post ) {
-    if ( $post->post_type !== 'sogd-speaker' ) {
-        return $allowed_block_types;
-    }
-    return array(
-        'core/gallery',
-        'core/heading',
-        'core/image',
-        'core/list',
-        'core/paragraph',
-        'core/separator',
-        'core/shortcode',
-        'core-embed/facebook',
-        'core-embed/instagram',
-        'core-embed/twitter',
-        'core-embed/youtube',
-    );
-}
-
-// ----------------------------------------------------------------------------
-
 add_action( 'admin_init', 'sogd_post_speaker_add_festival_meta_box' );
 
 function sogd_post_speaker_add_festival_meta_box() {
