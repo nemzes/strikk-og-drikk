@@ -1,9 +1,5 @@
 <?php
-global $eo_event_loop,$eo_event_loop_args;
-
-//The list ID / classes
-$id = ( $eo_event_loop_args['id'] ? 'id="' . $eo_event_loop_args['id'] . '"' : '' );
-$classes = $eo_event_loop_args['class'];
+global $eo_event_loop, $eo_event_loop_args;
 
 ?>
 
@@ -13,7 +9,8 @@ $classes = $eo_event_loop_args['class'];
     <?php while ($eo_event_loop->have_posts()) : ?>
       <?php $eo_event_loop->the_post(); ?>
       <li>
-        <article class="ssod-event">
+        <?php $classes = ssod_get_event_classes(get_the_ID()); ?>
+        <article class="ssod-event <?php echo esc_attr($classes) ?>">
           <time class="date">
             <span class="month"><?php eo_the_start('M'); ?></span>
             <span class="day"><?php eo_the_start('d'); ?></span>

@@ -43,8 +43,9 @@
 
 .global-header img {
   height: var(--header-height);
-  width: var(--header-height);
   padding: calc(var(--header-height) / 8);
+  padding-top: 0;
+  width: var(--header-height);
 }
 
 .global-header--wrap {
@@ -339,6 +340,12 @@
   width: 4rem;
 }
 
+.ssod-listing--festival .ssod-post-meta .avatar-wrap {
+  border-left-color: var(--color-festival);
+  border-right-color: var(--color-festival);
+}
+
+
 /* -------------------------------------------------------------------------- */
 
 .ssod-listing--festival {
@@ -436,6 +443,32 @@
   font-size: 1.25rem;
 }
 
+.body-text > h2 {
+  font-size: 2rem;
+  margin: var(--space-6) 0 var(--space-5) 0;
+  text-decoration-color: var(--color-mood);
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+}
+
+.body-text > h3 {
+  font-size: 1.666rem;
+  font-weight: bold;
+  margin: var(--space-5) 0 var(--space-4) 0;
+  text-decoration-color: var(--color-mood);
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+}
+
+.body-text > h4 {
+  font-size: 1.333rem;
+  font-weight: bold;
+  margin: var(--space-3) 0 var(--space-2) 0;
+  text-decoration-color: var(--color-mood);
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+}
+
 /* -------------------------------------------------------------------------- */
 
 .ssod-layout-clamp {
@@ -517,6 +550,11 @@
 
 .ssod-event a {
   text-decoration: none;
+}
+
+.ssod-event a:focus,
+.ssod-event a:hover {
+  text-decoration: underline;
 }
 
 .ssod-event .overview {
@@ -835,6 +873,7 @@
   padding: var(--space-3) var(--space-4);
   text-decoration: none;
   transition: all .4s;
+  white-space: nowrap;
 }
 
 .ssod-view-article:focus,
@@ -873,3 +912,23 @@
   content: '>';
   margin-left: var(--space-3);
 }
+
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-event-tag::after {
+  align-self: center;
+  flex: 0 0 auto;
+}
+/* 
+.ssod-event-tag-tag1::after {
+  content: 'some icon';
+}
+
+.ssod-event-tag-tag2::after {
+  content: 'some icon';
+}
+
+.ssod-event-tag-tag3::after {
+  content: 'some icon';
+} */

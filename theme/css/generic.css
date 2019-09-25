@@ -2,6 +2,7 @@ html {
   background-color: var(--color-background);
   color: var(--color-text);
   font-family: var(--base-font-family);
+  quotes: "“" "”" "‘" "’";
   text-decoration-skip-ink: auto;
 }
 

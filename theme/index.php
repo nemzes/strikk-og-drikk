@@ -3,14 +3,12 @@
 <?php
 
 if (is_category()) {
-  $pageTitle = single_term_title("", false);
+  $pageTitle = esc_html(single_term_title("", false));
 
   $category_festival = sogd_get_category_festival(get_queried_object()->term_id);
   $extra_class = $category_festival ? 'ssod-listing--festival' : '';
-
 } elseif (is_search()) {
-
-  $pageTitle = 'Søk for "' . get_search_query(false) . '"';
+  $pageTitle = 'Søk på <q>' . get_search_query(false) . '</q>';
 }
 
 ?>
@@ -24,7 +22,7 @@ if (is_category()) {
   <div class="ssod-listing__content">
 
     <div class="ssod-listing__header">
-      <h1><?php echo esc_html($pageTitle) ?></h1>
+      <h1><?php echo $pageTitle ?></h1>
     </div>
 
     <?php get_template_part('loop'); ?>

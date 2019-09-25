@@ -73,6 +73,7 @@
       </section>
       <section class="ssod-front-sidebar">
         <h2>Hva skjer?</h2>
+
         <?php get_template_part('events'); ?>
 
         <?php if (is_active_sidebar('ssod-widgets-front-page')) : ?>

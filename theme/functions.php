@@ -205,6 +205,21 @@ function ssod_excerpt_more_none() {
   return '…';
 }
 
+function ssod_get_event_classes($eventId) {
+  $tags_list = get_the_terms($eventId, 'event-tag');
+
+  if (!$tags_list) {
+    return '';
+  }
+
+  $classes = array_map(
+    function($tag) { return 'ssod-event-tag-' . $tag->name; },
+    $tags_list
+  );
+
+  return 'ssod-event-tag ' . implode(' ', $classes);
+}
+
 // Create the Custom Excerpts callback
 function ssod_excerpt( $length_callback = '', $more_callback = '', $id = null ) {
   if ( function_exists( $length_callback ) ) {
@@ -391,6 +406,10 @@ function sogd_get_category_festival($cat_id) {
 }
 
 function sogd_get_post_festival($post_id) {
+  if (get_post_type($post_id) === 'sogd-festival') {
+    return get_post($post_id);
+  }
+
   $festivals = sogd_get_festivals();
   $post_cats = get_the_category($post_id);
 
