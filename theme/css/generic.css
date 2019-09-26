@@ -6,6 +6,12 @@ html {
   text-decoration-skip-ink: auto;
 }
 
+@media screen and (max-width: 1023px) {
+  html {
+    font-size: 14px;
+  }
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--heading-font-family);
   font-size: inherit;

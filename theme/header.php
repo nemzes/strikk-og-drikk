@@ -31,6 +31,11 @@
               </a>
             </div>
 
+            <input type="checkbox" id="ssod-toggle-menu-input" class="ssod-toggle-menu-input" />
+            <label class="ssod-toggle-menu" for="ssod-toggle-menu-input">
+              <span>Toggle menu</span>
+            </label>
+
             <nav class="ssod-global-nav" role="navigation">
               <?php wp_nav_menu( array( 'theme_location' => 'global-nav' ) ); ?>
             </nav>

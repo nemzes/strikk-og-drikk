@@ -28,6 +28,12 @@
   padding-top: 32px;
 }
 
+@media screen and (max-width: 782px) {
+  .admin-bar .ssod-site {
+    padding-top: 46px;
+  }
+}
+
 /* -------------------------------------------------------------------------- */
 
 .global-header {
@@ -55,6 +61,21 @@
 
 .global-header .ssod-search {
   margin-left: auto;
+}
+
+@media screen and (max-width: 839px) {
+  .global-header {
+    height: auto;
+  }
+
+  .global-header--wrap {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .global-header .ssod-search {
+    margin: var(--space-5);
+  }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -280,6 +301,13 @@
   margin-top: var(--space-6);
 }
 
+@media screen and (max-width: 639px) {
+  .singular__content {
+    padding-left: var(--space-5);
+    padding-right: var(--space-5);
+  }
+}
+
 /* -------------------------------------------------------------------------- */
 
 .singular--festival {
@@ -435,6 +463,7 @@
   display: block;
   margin: var(--space-6) auto;
   max-height: 50vh;
+  max-width: calc(100% - 2 * var(--space-5) - 2 * var(--space-3));
   padding: var(--space-5);
   width: auto;
 }
@@ -482,6 +511,12 @@
 .ssod-layout-clamp--content {
   max-width: 60rem;
   padding: 0 var(--space-7);
+}
+
+@media screen and (max-width: 839px) {
+  .ssod-layout-clamp {
+    --ssod-layout-padding: 2vw;
+  }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -707,6 +742,49 @@
 
 /* -------------------------------------------------------------------------- */
 
+.ssod-global-nav ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.ssod-global-nav li {
+  display: block;
+}
+
+.ssod-global-nav a {
+  border-radius: 1rem;
+  color: var(--color-background);
+  font-size: 1.125rem;
+  margin-left: var(--space-6);
+  padding: var(--space-3) var(--space-5);
+  text-decoration: none;
+}
+
+.ssod-global-nav a:focus {
+  background-color: var(--color-mood);
+  color: var(--color-brand);
+  outline: none;
+}
+
+@media screen and (max-width: 839px) {
+  .ssod-global-nav {
+    display: none;
+    width: 100%;
+  }
+
+  .ssod-global-nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .ssod-global-nav a {
+    margin-left: 0;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+
 .ssod-search {
   display: flex;
   border: 2px dotted hsla(var(--hsl-mood), .5);
@@ -755,31 +833,52 @@
   background-color: var(--color-background);
 }
 
+@media screen and (max-width: 839px) {
+  .ssod-search {
+    display: none;
+  }
+}
+
 /* -------------------------------------------------------------------------- */
 
-.ssod-global-nav ul {
-  display: flex;
-  margin: 0;
-  padding: 0;
+.ssod-toggle-menu,
+.ssod-toggle-menu-input,
+.ssod-toggle-menu > span {
+  cursor: pointer;
+  display: none;
 }
 
-.ssod-global-nav li {
+.ssod-toggle-menu-input {
+  opacity: 0;
+  position: relative;
+  right: calc(-.5 * var(--header-height));
+}
+
+.ssod-toggle-menu-input:focus + .ssod-toggle-menu {
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.ssod-toggle-menu::after {
+  content: url(../img/menu.svg);
   display: block;
+  height: var(--header-height);
+  padding: calc(var(--header-height) / 8);
+  width: var(--header-height);
 }
 
-.ssod-global-nav a {
-  border-radius: 1rem;
-  color: var(--color-background);
-  font-size: 1.125rem;
-  margin-left: var(--space-6);
-  padding: var(--space-3) var(--space-5);
-  text-decoration: none;
-}
+@media screen and (max-width: 839px) {
+  .ssod-toggle-menu,
+  .ssod-toggle-menu-input {
+    display: block;
+  }
 
-.ssod-global-nav a:focus {
-  background-color: var(--color-mood);
-  color: var(--color-brand);
-  outline: none;
+  .ssod-toggle-menu-input:checked ~ .ssod-global-nav {
+    display: block;
+  }
+
+  .ssod-toggle-menu-input:checked ~ .ssod-search {
+    display: flex;
+  }
 }
 
 /* -------------------------------------------------------------------------- */
