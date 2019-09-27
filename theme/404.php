@@ -1,24 +1,10 @@
 <?php get_header(); ?>
 
-	<main role="main" aria-label="Content">
-		<!-- section -->
-		<section>
-
-			<!-- article -->
-			<article id="post-404">
-
-				<h1>Har du mistet en tråd?</h1>
-				<h2>
-					<a href="<?php echo esc_url( home_url() ); ?>"><?php esc_html( 'Return home?', 'html5blank' ); ?></a>
-				</h2>
-
-			</article>
-			<!-- /article -->
-
-		</section>
-		<!-- /section -->
-	</main>
-
-<?php get_sidebar(); ?>
+  <main role="main" aria-label="Content">
+    <h1>Har du mistet en tråd?</h1>
+    <h2>
+      <a href="<?php echo esc_url( home_url() ); ?>">Gå hjem</a>
+    </h2>
+  </main>
 
 <?php get_footer(); ?>

@@ -618,14 +618,17 @@
 
 @media screen and (max-width: 767px) {
   .ssod-layout-sidebar {
-    display: block;
+    grid-template-columns: 100%;
     margin: 0 var(--space-6);
+  }
+
+  .ssod-layout-sidebar > .ssod-front-sidebar {
+    order: -1;
   }
 }
 
 @media screen and (max-width: 479px) {
   .ssod-layout-sidebar {
-    display: block;
     margin: 0;
   }
 }
@@ -881,6 +884,10 @@
 .ssod-speaker-summary > .ssod-speaker-photo {
   flex: 0 0 auto;
   margin-right: var(--space-7);
+}
+
+.ssod-speaker-summary > .ssod-excerpt {
+  flex: 1 1 auto;
 }
 
 @media screen and (max-width: 479px) {
