@@ -24,7 +24,7 @@ if ( ! isset( $content_width ) ) {
 if ( function_exists( 'add_theme_support' ) ) {
 
   // Add Thumbnail Theme Support.
-  // add_theme_support( 'post-thumbnails' );
+  add_theme_support( 'post-thumbnails' );
   add_image_size( 'large', 700, '', true ); // Large Thumbnail.
   add_image_size( 'medium', 250, '', true ); // Medium Thumbnail.
   add_image_size( 'small', 120, '', true ); // Small Thumbnail.
@@ -542,6 +542,17 @@ function sogd_get_all_festivals_parent_cats() {
 
   $cats = array_map(
     function($festival) { return sogd_get_festival_parent_cat($festival); },
+    $festivals
+  );
+
+  return $cats;
+}
+
+function sogd_get_all_festivals_parent_events_cats() {
+  $festivals = sogd_get_festivals();
+
+  $cats = array_map(
+    function($festival) { return sogd_get_festival_parent_event_cat($festival); },
     $festivals
   );
 

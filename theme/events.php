@@ -1,13 +1,13 @@
 <?php
 
 $args = array(
-  'event_start_after' => date('Y-m-d'),
-  'numberposts' => 100,
-  'post_type' => array('event'),
 	'post_status' => array('publish'),
+  'event_start_after' => date('Y-m-d'),
+  'no_found_rows'=> true,
+  'post_type' => array('event'),
+  'posts_per_page' => 10,
   'showpastevents' => true,
   'suppress_filters' => false,
-  'nopaging' => true,
 );
 
 $eventloop = new WP_Query($args);

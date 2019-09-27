@@ -8,25 +8,35 @@
         </a>
       </h2>
 
-      <div class="ssod-post-meta">
-        <span class="avatar-wrap">
-          <?php echo get_avatar( get_the_author_meta( 'ID' ), 128 ); ?>
-        </span>
-        <div class="meta">
-          <span class="meta-title">Skrevet av</span>
-          <span class="meta-value"><?php the_author(); ?></span>
+      <?php if (get_post_type() !== 'sogd-speaker') : ?>
+        <div class="ssod-post-meta">
+          <span class="avatar-wrap">
+            <?php echo get_avatar(get_the_author_meta('ID'), 128 ); ?>
+          </span>
+          <div class="meta">
+            <span class="meta-title">Skrevet av</span>
+            <span class="meta-value"><?php the_author(); ?></span>
+          </div>
+          <div class="meta">
+            <span class="meta-title">Publisert</span>
+            <time class="meta-value" datetime="<?php the_time( 'Y-m-d' ); ?> <?php the_time( 'H:i' ); ?>">
+              <?php the_date(); ?>
+            </time>
+          </div>
         </div>
-        <div class="meta">
-          <span class="meta-title">Publisert</span>
-          <time class="meta-value" datetime="<?php the_time( 'Y-m-d' ); ?> <?php the_time( 'H:i' ); ?>">
-            <?php the_date(); ?>
-          </time>
+        <div class="ssod-excerpt">
+          <?php ssod_excerpt( 'ssod_excerpt_len_index' ); ?>
         </div>
-      </div>
-
-      <div class="ssod-excerpt">
-        <?php ssod_excerpt( 'ssod_excerpt_len_index' ); ?>
-      </div>
+      <?php else: ?>
+        <div class="ssod-speaker-summary">
+          <div class="ssod-speaker-photo">
+            <?php the_post_thumbnail(); ?>
+          </div>
+          <div class="ssod-excerpt">
+            <?php ssod_excerpt( 'ssod_excerpt_len_index' ); ?>
+          </div>
+        </div>
+      <?php endif; ?>
 
       <?php edit_post_link(); ?>
 

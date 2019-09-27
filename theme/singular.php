@@ -20,6 +20,7 @@
       <div class="singular__content">
         <div class="singular__header">
           <h1><?php the_title(); ?></h1>
+
           <?php if (!in_array($post_type, array('sogd-festival', 'sogd-speaker'))) : ?>
             <div class="ssod-post-meta">
               <span class="avatar-wrap">
@@ -37,6 +38,13 @@
               </div>
             </div>
           <?php endif; ?>
+
+          <?php if ($post_type === 'sogd-speaker') : ?>
+            <div class="ssod-speaker-photo">
+              <?php the_post_thumbnail(); ?>
+            </div>
+          <?php endif; ?>
+
         </div>
         <div class="singular__body">
           <div class="body-text">

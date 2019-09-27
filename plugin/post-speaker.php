@@ -4,8 +4,9 @@ defined('ABSPATH') or die('No script kiddies please!');
 add_action( 'init', 'sogd_post_speaker_create' );
 
 function sogd_post_speaker_create() {
-    register_taxonomy_for_object_type( 'category', 'sogd-speaker' );
-    register_post_type( 'sogd-speaker',
+    register_taxonomy_for_object_type('category', 'sogd-speaker');
+
+    register_post_type('sogd-speaker',
         array(
         'labels'       => array(
             'name'               => esc_html( 'Speakers', 'sogd' ),
@@ -43,7 +44,7 @@ function sogd_post_speaker_create() {
 
 // ----------------------------------------------------------------------------
 
-add_filter( 'pre_get_posts', 'sogd_post_speaker_show_in_category' );
+add_filter('pre_get_posts', 'sogd_post_speaker_show_in_category');
 
 function sogd_post_speaker_show_in_category( $query ) {
     if ( (is_category() || is_tag()) && $query->is_archive() && empty( $query->query_vars['suppress_filters'] ) ) {
@@ -54,44 +55,7 @@ function sogd_post_speaker_show_in_category( $query ) {
 
 // ----------------------------------------------------------------------------
 
-add_action( 'admin_init', 'sogd_post_speaker_add_festival_meta_box' );
-
-function sogd_post_speaker_add_festival_meta_box() {
-    add_meta_box( 'sogd_post_speaker_festival', 'Festivals', 'sogd_post_speaker_festival_field', 'sogd-speaker' );
-}
-
-function sogd_post_speaker_festival_field() {
-    global $post;
-
-    $all_festivals = get_posts( array(
-        'post_type' => 'sogd-festival',
-        'numberposts' => -1,
-        'orderby' => 'post_title',
-        'order' => 'ASC'
-    ) );
-    ?>
-        <input
-            type="hidden"
-            name="sogd_post_speaker_festival_nonce"
-            value="<?php echo wp_create_nonce( basename( __FILE__ ) ); ?>"
-        />
-
-        <label for="sogd_post_speaker_festival">Festival</label>
-        <select name="sogd_post_speaker_festival">
-            <option value="">— None —</option>
-            <?php foreach ( $all_festivals as $festival ) : ?>
-                <option
-                    value="<?php echo $festival->ID; ?>"
-                    <?php echo ( $festival->ID == $post->sogd_linked_festival ) ? 'selected="selected"' : ''; ?>
-                >
-                    <?php echo htmlspecialchars($festival->post_title); ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    <?php
-}
-
-add_action( 'save_post', 'sogd_post_speaker_save' );
+add_action('save_post', 'sogd_post_speaker_save');
 
 function sogd_post_speaker_save( $post_id ) {
 

@@ -76,6 +76,10 @@
 
         <?php get_template_part('events'); ?>
 
+        <p class="ssod-standout-text">
+          <a href="/arrangementer/">Vis alle arrangementer</a>
+        </p>
+
         <?php if (is_active_sidebar('ssod-widgets-front-page')) : ?>
           <?php dynamic_sidebar('ssod-widgets-front-page'); ?>
         <?php endif; ?>

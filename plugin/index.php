@@ -13,6 +13,9 @@ defined('ABSPATH') or die('No script kiddies please!');
 require_once('post-festival.php');
 require_once('post-speaker.php');
 
+define('SOGD_ARCHIVE_PAGE_SLUG', 'arkiv');
+define('SOGD_EVENTS_PAGE_SLUG', 'arrangementer');
+
 // ----------------------------------------------------------------------------
 
 add_filter('allowed_block_types', 'sogd_allowed_blocks', 10, 2);
@@ -45,7 +48,15 @@ function sogd_allowed_blocks($allowed_block_types, $post) {
 // ----------------------------------------------------------------------------
 
 add_action('init', 'sogd_change_permalinks');
+add_action('init', 'sogd_remove_featured_images');
 add_action('init', 'sogd_create_archive_page');
+add_action('init', 'sogd_create_events_page');
+
+function sogd_remove_featured_images() {
+  remove_post_type_support('event', 'thumbnail');
+  remove_post_type_support('page', 'thumbnail');
+  remove_post_type_support('post', 'thumbnail');
+}
 
 function sogd_change_permalinks() {
   global $wp_rewrite;
@@ -54,10 +65,8 @@ function sogd_change_permalinks() {
 }
 
 function sogd_create_archive_page() {
-  $archive_page_slug = 'arkiv';
-
   $args = array(
-    'name' => $archive_page_slug,
+    'name' => SOGD_ARCHIVE_PAGE_SLUG,
     'numberposts' => 1,
     'post_type' => 'page',
   );
@@ -67,7 +76,7 @@ function sogd_create_archive_page() {
   if (count($posts) === 0) {
     $post_details = array(
       'post_title' => 'Arkiv',
-      'post_name' => $archive_page_slug,
+      'post_name' => SOGD_ARCHIVE_PAGE_SLUG,
       'post_content' => '',
       'post_status' => 'publish',
       'post_type' => 'page'
@@ -75,6 +84,41 @@ function sogd_create_archive_page() {
   
      wp_insert_post($post_details);
   }
+}
+
+function sogd_create_events_page() {
+  $args = array(
+    'name' => SOGD_EVENTS_PAGE_SLUG,
+    'numberposts' => 1,
+    'post_type' => 'page',
+  );
+
+  $posts = get_posts($args);
+
+  if (count($posts) === 0) {
+    $post_details = array(
+      'post_title' => 'Arrangementer',
+      'post_name' => SOGD_EVENTS_PAGE_SLUG,
+      'post_content' => '',
+      'post_status' => 'publish',
+      'post_type' => 'page'
+    );
+  
+     wp_insert_post($post_details);
+  }
+}
+
+// ----------------------------------------------------------------------------
+
+add_filter('pre_get_posts', 'sogd_search_filter');
+
+function sogd_search_filter($query) {
+  if ($query->is_search) {
+    $archive_id = get_page_by_path(SOGD_ARCHIVE_PAGE_SLUG)->ID;
+    $events_id = get_page_by_path(SOGD_EVENTS_PAGE_SLUG)->ID;
+    $query->set('post__not_in', array($archive_id, $events_id));
+  }
+  return $query;
 }
 
 // ----------------------------------------------------------------------------
