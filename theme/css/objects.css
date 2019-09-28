@@ -877,6 +877,7 @@
 /* -------------------------------------------------------------------------- */
 
 .ssod-speaker-summary {
+  align-items: center;
   display: flex;
   margin-top: var(--space-6);
 }
@@ -1199,3 +1200,45 @@
 .ssod-event-tag-tag3::after {
   content: 'some icon';
 } */
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-404 {
+  background-image: url('../img/bg-yarn-on-fence.jpg');
+  background-size: cover;
+  background-position: 50% 50%;
+  min-height: 80vh;
+  position: relative;
+}
+
+.ssod-404__text {
+  align-items: center;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  padding: 0 var(--space-7);
+  position: absolute;
+  width: 100%;
+}
+
+.ssod-404__text h1 {
+  color: var(--color-text);
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: -2px;
+  line-height: 1;
+  padding: var(--space-6) 0;
+  text-align: center;
+  text-shadow:
+    2px 2px var(--color-mood),
+    2px -2px var(--color-mood),
+    -2px 2px var(--color-mood),
+    -2px -2px var(--color-mood);
+}
+
+.ssod-404__text p {
+  font-size: 1.25rem;
+}

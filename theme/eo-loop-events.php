@@ -10,14 +10,10 @@
 
 <?php else : ?>
 
-  <article id="post-0" class="post no-results not-found">
-    <header class="entry-header">
-      <h1 class="entry-title"><?php _e( 'Nothing Found', 'eventorganiser' ); ?></h1>
-    </header>
+  <article class="ssod-no-results">
+    <h2>Ingen arrangementer</h2>
 
-    <div class="entry-content">
-      <p><?php _e( 'Apologies, but no results were found for the requested archive. ', 'eventorganiser' ); ?></p>
-    </div>
+    <p>Beklager; det er ingenting å se her</p>
   </article>
 
 <?php endif;
