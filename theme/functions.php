@@ -23,6 +23,10 @@ if (function_exists('add_theme_support')) {
   // Enables post and comment RSS feed links to head.
   add_theme_support( 'automatic-feed-links' );
 
+  // Disable colour pickers in blocks
+  add_theme_support( 'editor-color-palette' );
+  add_theme_support( 'disable-custom-colors' );
+
   // Enable HTML5 support.
   add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
 
