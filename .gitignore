@@ -1,3 +1,5 @@
 /data
 /wordpress
 *.swp
+.DS_Store
+
