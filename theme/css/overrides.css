@@ -1,0 +1,19 @@
+/* --- Instagram Widget by WPZOOM --- */
+
+.zoom-instagram-widget__items {
+  display: grid;
+  grid-template-columns: repeat(4, 25fr);
+  grid-gap: var(--space-4);
+  margin: 0;
+}
+
+.zoom-instagram-widget__item {
+  float: none;
+  margin: 0 !important;
+}
+
+.zoom-instagram-link {
+  height: auto !important;
+  padding-bottom: 100%;
+  width: 100% !important;
+}
