@@ -78,6 +78,7 @@ function html5blank_styles() {
   wp_register_style( 'sogd-settings', get_template_directory_uri() . '/css/settings.css', array( 'sanitize' ), '1.0' );
   wp_register_style( 'sogd-generic', get_template_directory_uri() . '/css/generic.css', array( 'sogd-settings' ), '1.0' );
   wp_register_style( 'sogd-objects', get_template_directory_uri() . '/css/objects.css', array( 'sogd-settings' ), '1.0' );
+  wp_register_style( 'sogd-overrides', get_template_directory_uri() . '/css/overrides.css', array( 'sogd-settings' ), '1.0' );
 
   // Register CSS
   wp_enqueue_style( 'sanitize' );
