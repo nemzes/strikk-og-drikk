@@ -85,6 +85,7 @@ function html5blank_styles() {
   wp_enqueue_style( 'sogd-settings' );
   wp_enqueue_style( 'sogd-generic' );
   wp_enqueue_style( 'sogd-objects' );
+  wp_enqueue_style( 'sogd-overrides' );
 }
 
 // Remove the <div> surrounding the dynamic navigation to cleanup markup
