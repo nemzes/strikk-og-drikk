@@ -17,3 +17,18 @@
   padding-bottom: 100%;
   width: 100% !important;
 }
+
+/* --- Jetpack email subscription form --- */
+
+.jetpack_subscription_widget form {
+  text-align: center;
+}
+
+.jetpack_subscription_widget #subscribe-email {
+  display: inline-block;
+  width: 50%;
+}
+
+.jetpack_subscription_widget #subscribe-submit {
+  display: inline-block;
+}
