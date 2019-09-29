@@ -44,7 +44,7 @@
       <?php endif ?>
 
       <?php if (eo_get_venue()) : ?>
-        <div><?php eo_venue_name(); ?></div>
+        <div class="ssod-event-meta__location"><?php eo_venue_name(); ?></div>
       <?php endif ?>
 
       <?php if (eo_recurs() && $upcoming->have_posts()) : ?>
@@ -60,8 +60,6 @@
 
         <?php
         wp_reset_postdata();
-        //With the ID 'eo-upcoming-dates', JS will hide all but the next 5 dates, with options to show more.
-        //            wp_enqueue_script( 'eo_front' );
         ?>
       <?php endif ?>
 

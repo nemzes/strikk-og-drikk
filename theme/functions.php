@@ -5,13 +5,7 @@
  * Custom functions, support, custom post types and more.
  */
 
-require_once 'modules/is-debug.php';
-
-/*------------------------------------*\
-  External Modules/Files
-\*------------------------------------*/
-
-// Load any external files you have here
+// require_once 'modules/is-debug.php';
 
 /*------------------------------------*\
   Theme Support
@@ -21,33 +15,10 @@ if ( ! isset( $content_width ) ) {
   $content_width = 900;
 }
 
-if ( function_exists( 'add_theme_support' ) ) {
+if (function_exists('add_theme_support')) {
 
   // Add Thumbnail Theme Support.
-  add_theme_support( 'post-thumbnails' );
-  add_image_size( 'large', 700, '', true ); // Large Thumbnail.
-  add_image_size( 'medium', 250, '', true ); // Medium Thumbnail.
-  add_image_size( 'small', 120, '', true ); // Small Thumbnail.
-  add_image_size( 'custom-size', 700, 200, true ); // Custom Thumbnail Size call using the_post_thumbnail('custom-size');
-
-  // Add Support for Custom Backgrounds - Uncomment below if you're going to use.
-  /*add_theme_support('custom-background', array(
-  'default-color' => 'FFF',
-  'default-image' => get_template_directory_uri() . '/img/bg.jpg'
-  ));*/
-
-  // Add Support for Custom Header - Uncomment below if you're going to use.
-  /*add_theme_support('custom-header', array(
-  'default-image'      => get_template_directory_uri() . '/img/headers/default.jpg',
-  'header-text'      => false,
-  'default-text-color'   => '000',
-  'width'          => 1000,
-  'height'         => 198,
-  'random-default'     => false,
-  'wp-head-callback'     => $wphead_cb,
-  'admin-head-callback'  => $adminhead_cb,
-  'admin-preview-callback' => $adminpreview_cb
-  ));*/
+  add_theme_support('post-thumbnails');
 
   // Enables post and comment RSS feed links to head.
   add_theme_support( 'automatic-feed-links' );
@@ -57,6 +28,15 @@ if ( function_exists( 'add_theme_support' ) ) {
 
   // Localisation Support.
   load_theme_textdomain( 'html5blank', get_template_directory() . '/languages' );
+
+  update_option('thumbnail_size_w', 400);
+  update_option('thumbnail_size_h', 300);
+  
+  update_option('medium_size_w', 800);
+  update_option('medium_size_h', 600);
+  
+  update_option('large_size_w', 1200);
+  update_option('large_size_h', 900);
 }
 
 function ssod_disable_event_organiser_css($options) {

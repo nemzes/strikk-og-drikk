@@ -222,3 +222,27 @@ function sogd_settings_page() {
     </div>
   <?php
 }
+
+// ----------------------------------------------------------------------------
+
+function sogd_update_all_events() {
+  // Update all events in case they were migrated from another site
+  // @see https://wordpress.org/support/topic/fatal-error-uncaught-exception-15/
+
+  $args = array(
+    'post_type' => array('event'),
+    'showpastevents' => true,
+    'suppress_filters' => true,
+    'no_found_rows'=> true,
+    'posts_per_page' => 10000,
+  );
+  
+  $query = new WP_Query($args);
+  $events = $query->posts;
+
+  foreach ($events as $event) {
+    eo_update_event($event->ID);
+  }
+}
+
+register_activation_hook(__FILE__, 'sogd_update_all_events');
