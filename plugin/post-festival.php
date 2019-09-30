@@ -65,7 +65,7 @@ function sogd_post_festival_configuration() {
 
         <?php
             wp_editor(
-                is_array($sogd_festival_fields) ? $sogd_festival_fields['front-blurb'] : -1,
+                is_array($sogd_festival_fields) ? $sogd_festival_fields['front-blurb'] : '',
                 'sogd_festival_front_blurb',
                 $settings = array(
                     'media_buttons' => false,
@@ -79,6 +79,18 @@ function sogd_post_festival_configuration() {
 
         <p class="description">
             The blurb will be on the front page of the site if this is the active festival
+        </p>
+
+        <h3>External link</h3>
+
+        <input
+            name="sogd_festival[external-link]"
+            value="<?php echo is_array($sogd_festival_fields) ? $sogd_festival_fields['external-link'] : '' ?>"
+        >
+
+        <p class="description">
+            If external link is defined, categories and posts are ignored and not output in front page. Leave blank to use
+            festival normal menu instead.
         </p>
 
         <h3>Parent category for festival posts</h3>

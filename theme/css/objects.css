@@ -89,7 +89,7 @@
 }
 
 .festival-hero__back {
-  background-image: url('../img/sample-festival-splash.jpg');
+  /* background-image: url('../img/sample-festival-splash.jpg'); */
   background-position: 50% 50%;
   background-size: cover;
   position: relative;

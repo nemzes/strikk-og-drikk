@@ -5,12 +5,14 @@
     <?php $sogd_festival_id = get_option('sogd-festival-current'); ?>
     <?php $sogd_festival_current = get_post($sogd_festival_id); ?>
     <?php $sogd_festival_fields = get_post_meta($sogd_festival_id, 'sogd_festival', true); ?>
+    <?php $sogd_festival_image = wp_get_attachment_url(get_post_thumbnail_id($sogd_festival_id)); ?>
+    <?php $sogd_link = $sogd_festival_fields['external-link'] ? $sogd_festival_fields['external-link'] : get_the_permalink($sogd_festival_id); ?>
     <section class="festival-hero">
-      <div class="festival-hero__back">
+      <div class="festival-hero__back" style="background-image: url('<?php echo esc_attr($sogd_festival_image) ?>');">
         <div class="ssod-layout-clamp">
           <div class="festival-hero__heading">
             <h1>
-              <a href="<?php the_permalink($sogd_festival_id) ?>">
+              <a href="<?php echo esc_attr($sogd_link) ?>">
                 <?php echo esc_html($sogd_festival_current->post_title); ?>
               </a>
             </h1>
@@ -22,9 +24,11 @@
           <div class="festival-hero__blurb">
             <?php echo wp_kses_post($sogd_festival_fields['front-blurb']) ?>
           </div>
-          <div class="festival-hero__links">
-            <?php sogd_output_festival_links($sogd_festival_current); ?>
-          </div>
+          <?php if (! $sogd_festival_fields['external-link']) : ?>
+            <div class="festival-hero__links">
+              <?php sogd_output_festival_links($sogd_festival_current); ?>
+            </div>
+          <?php endif; ?>
         </div>
       </div>
       <div class="festival-hero__segue">
