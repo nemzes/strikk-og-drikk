@@ -25,13 +25,9 @@
                 'group_events_by'   => 'occurrence',
               ));
             ?>
-            <?php if (sizeof($upcoming->posts) == 1) : ?>
+            <?php if (sizeof($upcoming->posts) > 0) : ?>
               (<button class="ssod-button-link" id="ssod_event_dates_toggler">
-                one more date
-              </button>)
-            <?php elseif (sizeof($upcoming->posts) > 1) : ?>
-              (<button class="ssod-button-link" id="ssod_event_dates_toggler">
-                <?php echo sizeof($upcoming->posts) ?> more dates
+              se flere datoer
               </button>)
             <?php endif ?>
 

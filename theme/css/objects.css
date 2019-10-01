@@ -543,7 +543,7 @@
 }
 
 .body-text p img,
-.body-text figure img,
+.body-text :not(.blocks-gallery-item) > figure > img,
 .body-text .wp-block-image img {
   border: var(--space-3) solid var(--color-mood);
   box-sizing: content-box;
