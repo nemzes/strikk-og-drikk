@@ -5,6 +5,7 @@
   grid-template-columns: repeat(4, 25fr);
   grid-gap: var(--space-4);
   margin: 0;
+  padding: 0;
 }
 
 .zoom-instagram-widget__item {
