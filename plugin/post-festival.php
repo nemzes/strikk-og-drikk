@@ -20,14 +20,16 @@ function sogd_post_festival_create() {
             'not_found'          => esc_html( 'No festivals found', 'sogd' ),
             'not_found_in_trash' => esc_html( 'No festivals found in Trash', 'sogd' ),
         ),
-        'public'       => true,
-        'hierarchical' => true,
-        'has_archive'  => true,
-        'show_in_rest' => true,
-        'rewrite'      => array(
+        'menu_icon'     => 'dashicons-star-filled',
+        'menu_position' => 5,
+        'public'        => true,
+        'hierarchical'  => true,
+        'has_archive'   => true,
+        'show_in_rest'  => true,
+        'rewrite'       => array(
             'slug'  => 'festivals'
         ),
-        'supports'     => array(
+        'supports'      => array(
             'title',
             'editor',
             'thumbnail'
@@ -89,8 +91,8 @@ function sogd_post_festival_configuration() {
         >
 
         <p class="description">
-            If external link is defined, categories and posts are ignored and not output in front page. Leave blank to use
-            festival normal menu instead.
+            If external link is defined, categories and posts are ignored and not output in front page. Leave blank to
+            display the normal festival menu items instead.
         </p>
 
         <h3>Parent category for festival posts</h3>
@@ -129,14 +131,22 @@ function sogd_post_festival_configuration() {
 add_action( 'save_post', 'sogd_post_festival_configuration_save' );
 
 function sogd_post_festival_configuration_save( $post_id ) {
+
+    // only run this for series
+    if ('sogd-festival' != get_post_type($post_id)) {
+        return $post_id;
+    }
+
     // verify nonce
     if ( !wp_verify_nonce( $_POST['sogd_post_festival_configuration_nonce'], basename(__FILE__) ) ) {
         return $post_id;
     }
+
     // check autosave
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
         return $post_id;
     }
+
     // check permissions
     if ( 'sogd-festival' === $_POST['post_type'] ) {
         if ( !current_user_can( 'edit_page', $post_id ) ) {

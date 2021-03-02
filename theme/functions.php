@@ -392,8 +392,15 @@ function sogd_get_category_festival($cat_id) {
 }
 
 function sogd_get_post_festival($post_id) {
-  if (get_post_type($post_id) === 'sogd-festival') {
+  $post_type = get_post_type($post_id);
+
+  if ($post_type === 'sogd-festival') {
     return get_post($post_id);
+  }
+
+  if ($post_type === 'sogd-speaker') {
+    $post_meta = get_post_meta($post_id, 'sogd_speaker', true);
+    return get_post($post_meta['festival']);
   }
 
   $festivals = sogd_get_festivals();

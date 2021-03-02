@@ -246,3 +246,9 @@ function sogd_update_all_events() {
 }
 
 register_activation_hook(__FILE__, 'sogd_update_all_events');
+
+// ----------------------------------------------------------------------------
+
+function sogd_debug($what) {
+  echo "<script>console.log('PHP', `" . esc_html(print_r($what, true)) . "`)</script>";
+}
