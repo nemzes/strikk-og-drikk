@@ -97,7 +97,7 @@ function sogd_post_speaker_configuration() {
 add_action('save_post', 'sogd_post_speaker_save');
 
 function sogd_post_speaker_save( $post_id ) {
-    // only run this for series
+    // only run this for speakers
     if ('sogd-speaker' != get_post_type($post_id)) {
         return $post_id;
     }

@@ -132,7 +132,7 @@ add_action( 'save_post', 'sogd_post_festival_configuration_save' );
 
 function sogd_post_festival_configuration_save( $post_id ) {
 
-    // only run this for series
+    // only run this for festivals
     if ('sogd-festival' != get_post_type($post_id)) {
         return $post_id;
     }
