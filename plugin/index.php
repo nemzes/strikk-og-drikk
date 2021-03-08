@@ -2,7 +2,7 @@
 /*
 Plugin Name: Strikk og Drikk
 Description: Sets up site for Strikk og Drikk
-Version: 1.0.0
+Version: 1.1.0
 Author: Nelson Menezes
 Author URI: https://fittopage.org
 License: MIT
@@ -12,6 +12,8 @@ defined('ABSPATH') or die('No script kiddies please!');
 
 require_once('post-festival.php');
 require_once('post-speaker.php');
+require_once('event.php');
+
 
 define('SOGD_ARCHIVE_PAGE_SLUG', 'arkiv');
 define('SOGD_EVENTS_PAGE_SLUG', 'arrangementer');

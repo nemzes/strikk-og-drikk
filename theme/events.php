@@ -1,9 +1,9 @@
 <?php
 
 $args = array(
-	'post_status' => array('publish'),
+  'post_status' => array('publish'),
   'event_start_after' => date('Y-m-d'),
-  'no_found_rows'=> true,
+  'no_found_rows' => true,
   'post_type' => array('event'),
   'posts_per_page' => 10,
   'showpastevents' => true,
@@ -16,7 +16,7 @@ if ($eventloop->have_posts()) : ?>
   <ul class="ssod-event-list">
     <?php while ($eventloop->have_posts()) : ?>
       <?php $eventloop->the_post(); ?>
-      <?php if (! sogd_get_event_festival($post->ID)) : ?>
+      <?php if (!sogd_get_event_festival($post->ID)) : ?>
         <li>
           <article class="ssod-event">
             <time class="date">

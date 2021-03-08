@@ -495,13 +495,14 @@
     0 0 var(--space-4) #fff,
     0 0 var(--space-5) #fff;
   top: 0;
-  z-index: 2;
+  z-index: 410;
 }
 
 .festival-header_content {
   align-items: baseline;
   display: flex;
   flex-wrap: wrap;
+  gap: var(--space-4) var(--space-6);
   justify-content: center;
   margin: 0 auto;
   max-width: 70rem;
@@ -518,13 +519,10 @@
   flex-wrap: wrap;
   font-family: var(--heading-font-family);
   font-size: 1.375rem;
+  gap: var(--space-4) var(--space-6);
   justify-content: center;
   margin: 0;
   padding: 0;
-}
-
-.festival-header li {
-  margin-left: var(--space-5);
 }
 
 .festival-header a {
@@ -815,9 +813,10 @@
 .ssod-post-meta {
   align-items: center;
   display: grid;
-  grid-template-columns: 6rem 9rem 9rem;
+  grid-template-columns: 6rem repeat(auto-fit, 12rem);
   grid-gap: var(--space-6);
   margin-bottom: var(--space-5);
+  text-align: left;
 }
 
 .ssod-post-meta .avatar-wrap {
@@ -832,6 +831,7 @@
   border: .5rem solid transparent;
   box-sizing: content-box;
   filter: grayscale(1);
+  object-fit: cover;
   height: 4rem;
   width: 4rem;
 }
@@ -844,6 +844,7 @@
 
 .ssod-post-meta .meta-value {
   display: block;
+  margin-top: .5em;
 }
 
 .singular--festival .ssod-post-meta {
@@ -880,11 +881,20 @@
 
 .ssod-speaker-photo > img {
   filter: sepia(1) hue-rotate(-10deg) saturate(3);
+  height: 100%;
   left: 50%;
+  object-fit: cover;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
+}
+
+.ssod-speaker-photo--small {
+  min-height: 0;
+  min-width: 0;
+  height: 5rem;
+  width: 5em
 }
 
 /* -------------------------------------------------------------------------- */
