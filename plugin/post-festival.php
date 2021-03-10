@@ -2,6 +2,8 @@
 defined('ABSPATH') or die('No script kiddies please!');
 
 add_action('init', function () {
+  add_rewrite_tag('%festival%', '([^&/]+)');
+
   register_post_type(
     'sogd-festival',
     array(
@@ -39,20 +41,21 @@ add_action('init', function () {
 
   add_rewrite_rule(
     '^festivals/([^/]*)/program/?',
-    'index.php?festival=$matches[1]&festival-page=program',
+    'index.php?post_type=sogd-festival&festival=$matches[1]&festival-page=program',
     'top'
   );
 });
 
 
 add_filter('query_vars', function ($vars) {
+  $vars[] = 'festival';
   $vars[] = 'festival-page';
   return $vars;
 });
 
 
 add_action('template_redirect', function () {
-  if (get_query_var('festival-page') === 'program') {
+  if (get_post_type() === 'sogd-festival' && get_query_var('festival-page') === 'program') {
     add_filter('template_include', function () {
       return get_template_directory() . '/festival-program.php';
     });
