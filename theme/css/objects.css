@@ -93,9 +93,9 @@
   background-position: 50% 50%;
   background-size: cover;
   position: relative;
-  max-height: 50vh;
-  min-height: 20rem;
-  height: calc(100vw * 9/16);
+  max-height: 40vh;
+  min-height: 16rem;
+  height: calc(100vw * 9 / 16);
 }
 
 .festival-hero__heading {
@@ -109,11 +109,14 @@
 
 .festival-hero__heading > h1 {
   background-color: hsla(var(--hsl-festival), 0.75);
+  box-shadow: 0 var(--space-2) var(--space-4) calc(-1 * var(--space-3)) black;
   color: hsl(var(--hsl-festival-text));
-  font-size: 4rem;
+  font-size: clamp(2.75rem, 7vmin, 4rem);
   font-weight: bold;
-  padding: 2rem 2rem 1rem 2rem;
+  padding: var(--space-4) var(--space-6);
   text-shadow: 0 0 var(--space-3) #fff;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
 }
 
 .festival-hero__heading a {
@@ -124,17 +127,27 @@
 
 .festival-hero__content {
   display: flex;
+  align-items: flex-start;
 }
 
 .festival-hero__blurb {
-  background-color: hsla(var(--hsl-background-text), 0.85);
+  background-color: hsla(var(--hsl-background-text), 0.75);
   box-shadow: 0 var(--space-2) var(--space-4) calc(-1 * var(--space-3)) black;
   color: var(--color-text);
   flex: 0 0 50vw;
   font-size: 1.125rem;
   line-height: 1.625;
   max-width: var(--blurb-max-width);
-  padding: var(--space-6) var(--space-6) var(--space-5) var(--space-6);
+  padding: var(--space-5) var(--space-6);
+  position: relative;
+}
+
+.festival-hero__blurb p {
+  margin: 0;
+}
+
+.festival-hero__blurb p + p {
+  margin-top: 1em;
 }
 
 .festival-hero__links {
@@ -159,14 +172,14 @@
   color: var(--color-festival-text);
   display: inline-block;
   font-family: var(--heading-font-family);
-  font-size: 1.5rem;
-  padding: .25rem 0 .25rem .75em;
+  font-size: clamp(1.2rem, 3vmin, 1.5rem);
+  padding: 0.25rem 0 0.25rem 0.75em;
   position: relative;
   text-decoration: none;
 }
 
 .festival-hero__links a::before {
-  content: '•';
+  content: "•";
   left: 0;
   position: absolute;
 }
@@ -201,14 +214,9 @@
 }
 
 @media screen and (max-width: 767px) {
-  .festival-hero__heading > h1 {
+  /* .festival-hero__heading > h1 {
     font-size: 3rem;
-  }
-
-  .festival-hero__blurb {
-    padding-bottom: var(--space-2);
-    padding-top: var(--space-2);
-  }
+  } */
 
   .festival-hero__segue {
     margin-top: var(--space-3);
@@ -221,7 +229,7 @@
 .hero {
   background-blend-mode: darken;
   background-color: var(--color-mood);
-  background-image: url('../img/banner-bg.jpg');
+  background-image: url("../img/banner-bg.jpg");
   background-position: 100% 50%;
   background-size: 52vw auto;
   margin-bottom: calc(var(--space-7) * 2);
@@ -250,11 +258,8 @@
   letter-spacing: -2px;
   line-height: 1;
   padding: var(--space-5) var(--space-5) var(--space-5) var(--space-7);
-  text-shadow:
-    2px 2px var(--color-mood),
-    2px -2px var(--color-mood),
-    -2px 2px var(--color-mood),
-    -2px -2px var(--color-mood);
+  text-shadow: 2px 2px var(--color-mood), 2px -2px var(--color-mood),
+    -2px 2px var(--color-mood), -2px -2px var(--color-mood);
 }
 
 .hero__blurb {
@@ -271,7 +276,7 @@
 }
 
 .festival-hero + .hero .hero__layout > svg {
-  filter: drop-shadow(0 0 .5rem var(--color-mood));
+  filter: drop-shadow(0 0 0.5rem var(--color-mood));
 }
 
 .festival-hero + .hero .hero__text {
@@ -334,7 +339,7 @@
 }
 
 .singular::after {
-  content: url('../img/logo-small.inverted.svg');
+  content: url("../img/logo-small.inverted.svg");
   display: block;
   height: 4rem;
   margin: 0 auto var(--space-7) auto;
@@ -351,9 +356,9 @@
 
 .singular__header h1 {
   color: var(--color-brand);
-  font-size: 4rem;
-  letter-spacing: -.05em;
-  line-height: 1;
+  font-size: clamp(3rem, 6vmin, 4rem);
+  letter-spacing: -0.05em;
+  line-height: 0.95;
   margin-bottom: var(--space-6);
   hyphens: auto;
 }
@@ -369,7 +374,7 @@
   align-items: center;
   align-self: center;
   display: flex;
-  height: calc(100vw * .25);
+  height: calc(100vw * 0.25);
   max-height: 50vh;
   overflow: hidden;
 }
@@ -410,7 +415,7 @@
 }
 
 .singular--festival .singular__content {
-  background-color: hsla(var(--hsl-background-text), .5);
+  background-color: hsla(var(--hsl-background-text), 0.5);
 }
 
 .singular--festival .singular__meta {
@@ -433,16 +438,16 @@
 
 .ssod-listing__header h1 {
   color: var(--color-brand);
-  font-size: 4rem;
+  font-size: clamp(3rem, 6vmin, 4rem);
   hyphens: auto;
-  letter-spacing: -.05em;
+  letter-spacing: -0.03em;
   line-height: 1;
   margin-bottom: var(--space-6);
   text-align: center;
 }
 
 .ssod-listing__header::after {
-  content: url('../img/yarn-ball.svg');
+  content: url("../img/yarn-ball.svg");
   display: block;
   height: 4rem;
   margin: var(--space-7) auto var(--space-8) auto;
@@ -453,7 +458,6 @@
   border-left-color: var(--color-festival);
   border-right-color: var(--color-festival);
 }
-
 
 /* -------------------------------------------------------------------------- */
 
@@ -476,7 +480,7 @@
 }
 
 .ssod-listing--festival .ssod-listing__content {
-  background-color: hsla(var(--hsl-background-text), .5);
+  background-color: hsla(var(--hsl-background-text), 0.5);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -486,13 +490,12 @@
   background-clip: padding-box;
   background-image: var(--background-image-festival);
   background-repeat: repeat;
-  box-shadow: 0 var(--space-2) var(--space-4) var(--space-2) rgba(0, 0, 0, 0.125);
+  box-shadow: 0 var(--space-2) var(--space-4) var(--space-2)
+    rgba(0, 0, 0, 0.125);
   color: var(--color-festival-text);
-  padding: var(--space-5) 0;
+  padding: var(--space-4) 0;
   position: sticky;
-  text-shadow:
-    0 0 var(--space-3) #fff,
-    0 0 var(--space-4) #fff,
+  text-shadow: 0 0 var(--space-3) #fff, 0 0 var(--space-4) #fff,
     0 0 var(--space-5) #fff;
   top: 0;
   z-index: 410;
@@ -511,14 +514,14 @@
 }
 
 .festival-header h1 {
-  font-size: 2rem;
+  font-size: 1.75rem;
 }
 
 .festival-header ul {
   display: flex;
   flex-wrap: wrap;
   font-family: var(--heading-font-family);
-  font-size: 1.375rem;
+  font-size: 1.25rem;
   gap: var(--space-4) var(--space-6);
   justify-content: center;
   margin: 0;
@@ -645,7 +648,7 @@
   align-self: stretch;
   background-color: var(--color-background-text);
   border-top: var(--space-5) solid var(--color-brand);
-  box-shadow: 0rem 0rem 2rem 0rem rgba(0, 0, 0, .25);
+  box-shadow: 0rem 0rem 2rem 0rem rgba(0, 0, 0, 0.25);
   margin-right: calc(-1 * var(--ssod-layout-padding));
   padding: var(--space-5) var(--space-6);
 }
@@ -669,7 +672,7 @@
   padding: 0;
 }
 
-.ssod-event-list li {
+.ssod-event-list > li {
   display: block;
   margin-bottom: var(--space-7);
 }
@@ -721,6 +724,22 @@
   white-space: nowrap;
 }
 
+.ssod-event--festival {
+  --festival-program-time-diameter: calc(var(--festival-program-day-diameter) * .6667);
+}
+.ssod-event--festival .date {
+  align-items: center;
+  background-color: var(--color-festival);
+  border-radius: calc(var(--festival-program-time-diameter) / 2);
+  display: flex;
+  flex-direction: column;
+  height: var(--festival-program-time-diameter);
+  justify-content: center;
+  line-height: 1;
+  margin-left: calc(var(--festival-program-day-diameter) * .3333 / 2);
+  width: var(--festival-program-time-diameter);
+}
+
 /* -------------------------------------------------------------------------- */
 
 .ssod-post-summary {
@@ -734,23 +753,23 @@
 .ssod-post-summary h2 {
   font-size: 3rem;
   margin-bottom: var(--space-5);
-  letter-spacing: -.075rem;
+  letter-spacing: -0.075rem;
 }
 
 .ssod-post-summary h2 a {
   display: inline-block;
   position: relative;
   text-decoration: none;
-  transition: all .4s;
+  transition: all 0.4s;
 }
 
 .ssod-post-summary h2 a::before {
-  content: '';
+  content: "";
   display: block;
   height: 100%;
   left: -1rem;
   position: absolute;
-  transition: all .4s;
+  transition: all 0.4s;
   width: calc(100% + 2rem);
 }
 
@@ -773,7 +792,7 @@
   pointer-events: none;
   position: absolute;
   right: 0;
-  transition: all .4s;
+  transition: all 0.4s;
 }
 
 .post-edit-link:focus,
@@ -820,7 +839,7 @@
 }
 
 .ssod-post-meta .avatar-wrap {
-  border: .5rem solid transparent;
+  border: 0.5rem solid transparent;
   border-left-color: var(--color-mood);
   border-radius: 50%;
   border-right-color: var(--color-mood);
@@ -828,7 +847,7 @@
 
 .ssod-post-meta .avatar {
   border-radius: 50%;
-  border: .5rem solid transparent;
+  border: 0.5rem solid transparent;
   box-sizing: content-box;
   filter: grayscale(1);
   object-fit: cover;
@@ -844,7 +863,7 @@
 
 .ssod-post-meta .meta-value {
   display: block;
-  margin-top: .5em;
+  margin-top: 0.5em;
 }
 
 .singular--festival .ssod-post-meta {
@@ -866,8 +885,8 @@
 
 .ssod-speaker-photo {
   border-radius: 10rem;
-  border: .5rem solid transparent;
-  box-shadow: 0 0 0 .5rem var(--color-festival);
+  border: 0.5rem solid transparent;
+  box-shadow: 0 0 0 0.5rem var(--color-festival);
   height: 20vw;
   margin: 0 auto;
   max-height: 10rem;
@@ -894,7 +913,7 @@
   min-height: 0;
   min-width: 0;
   height: 5rem;
-  width: 5em
+  width: 5em;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -979,7 +998,7 @@
 
 .ssod-search {
   display: flex;
-  border: 2px dotted hsla(var(--hsl-mood), .5);
+  border: 2px dotted hsla(var(--hsl-mood), 0.5);
   border-radius: 1rem;
   overflow: hidden;
 }
@@ -993,7 +1012,7 @@
   background-color: transparent;
   border: none;
   color: var(--color-background);
-  padding: .3rem .75rem;
+  padding: 0.3rem 0.75rem;
 }
 
 .ssod-search_input:focus {
@@ -1011,10 +1030,10 @@
 
 .ssod-search_submit {
   -webkit-appearance: none;
-  background-color: hsla(var(--hsl-mood), .5);
+  background-color: hsla(var(--hsl-mood), 0.5);
   display: block;
   border: none;
-  padding: .3rem .75rem;
+  padding: 0.3rem 0.75rem;
 }
 
 .ssod-search_submit:focus {
@@ -1043,7 +1062,7 @@
 .ssod-toggle-menu-input {
   opacity: 0;
   position: relative;
-  right: calc(-.5 * var(--header-height));
+  right: calc(-0.5 * var(--header-height));
 }
 
 .ssod-toggle-menu-input:focus + .ssod-toggle-menu {
@@ -1124,7 +1143,7 @@
 }
 
 .ssod-event-meta__location::before {
-  content: url('../img/location.svg');
+  content: url("../img/location.svg");
   display: inline-block;
   height: 1em;
   margin-right: var(--space-4);
@@ -1142,8 +1161,8 @@
 /* -------------------------------------------------------------------------- */
 
 .ssod-standout-text {
-  border-top: var(--space-3) solid var(--color-mood-dark);
-  font-size: 1.5rem;
+  border-top: var(--space-1) solid var(--color-mood-dark);
+  font-size: 1.33rem;
   margin: var(--space-6) 0;
   padding-top: var(--space-6);
   text-align: center;
@@ -1173,7 +1192,7 @@
   font-weight: bold;
   padding: var(--space-3) var(--space-4);
   text-decoration: none;
-  transition: all .4s;
+  transition: all 0.4s;
   white-space: nowrap;
 }
 
@@ -1205,15 +1224,14 @@
 }
 
 .ssod-pagination .prev::before {
-  content: '<';
+  content: "<";
   margin-right: var(--space-3);
 }
 
 .ssod-pagination .next::after {
-  content: '>';
+  content: ">";
   margin-left: var(--space-3);
 }
-
 
 /* -------------------------------------------------------------------------- */
 
@@ -1236,8 +1254,39 @@
 
 /* -------------------------------------------------------------------------- */
 
+.ssod-festival-program {
+  --festival-program-day-diameter: 7rem;
+  background-image: url(../img/thread.svg);
+  background-repeat: repeat-y;
+  background-position: 0 50%;
+}
+
+.ssod-festival-program__day-header {
+  align-items: center;
+  background-color: var(--color-background-text);
+  border-radius: calc(var(--festival-program-day-diameter) / 2);
+  border: var(--space-4) solid var(--color-festival);
+  display: flex;
+  flex-direction: column;
+  height: var(--festival-program-day-diameter);
+  justify-content: center;
+  line-height: 1;
+  margin: var(--space-6) 0;
+  width: var(--festival-program-day-diameter);
+}
+
+.ssod-festival-program__day {
+  font-size: 1.2rem;
+}
+
+.ssod-festival-program__date {
+  color: var(--color-festival-text-bright);
+}
+
+/* -------------------------------------------------------------------------- */
+
 .ssod-404 {
-  background-image: url('../img/bg-yarn-on-fence.jpg');
+  background-image: url("../img/bg-yarn-on-fence.jpg");
   background-size: cover;
   background-position: 50% 50%;
   min-height: 80vh;
@@ -1265,11 +1314,8 @@
   line-height: 1;
   padding: var(--space-6) 0;
   text-align: center;
-  text-shadow:
-    2px 2px var(--color-mood),
-    2px -2px var(--color-mood),
-    -2px 2px var(--color-mood),
-    -2px -2px var(--color-mood);
+  text-shadow: 2px 2px var(--color-mood), 2px -2px var(--color-mood),
+    -2px 2px var(--color-mood), -2px -2px var(--color-mood);
 }
 
 .ssod-404__text p {

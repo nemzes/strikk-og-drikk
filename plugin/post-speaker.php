@@ -28,7 +28,7 @@ add_action('init', function () {
       'has_archive'   => true,
       'show_in_rest'  => true,
       'rewrite'       => array(
-        'slug'  => 'speakers'
+        'slug'  => 'bidragsyter'
       ),
       'supports'      => array(
         'title',

@@ -1,7 +1,7 @@
-<article class="ssod-event">
+<article class="ssod-event ssod-event--festival">
   <time class="date">
-    <span class="month"><?php eo_the_start('M'); ?>!!</span>
-    <span class="day"><?php eo_the_start('d'); ?></span>
+    <span class="start"><?php eo_the_start('H:i'); ?></span>
+    <span class="end"><?php eo_the_end('H:i'); ?></span>
   </time>
   <div class="overview">
     <h3>

@@ -522,6 +522,11 @@ function sogd_output_festival_header($festival)
             Program
           </a>
         </li>
+        <li>
+          <a href="<?php the_permalink($festival->ID) ?>/bidragsytere">
+            Bidragsytere
+          </a>
+        </li>
 
         <?php
         wp_list_categories(array(

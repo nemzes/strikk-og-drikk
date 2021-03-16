@@ -28,7 +28,7 @@ add_action('init', function () {
       'has_archive'   => true,
       'show_in_rest'  => true,
       'rewrite'       => array(
-        'slug'  => 'festivals'
+        'slug'  => 'festival'
       ),
       'supports'      => array(
         'title',
@@ -39,9 +39,19 @@ add_action('init', function () {
     )
   );
 
+  // Support /festival/festival-name/program URLs
+
   add_rewrite_rule(
-    '^festivals/([^/]*)/program/?',
+    '^festival/([^/]*)/program/?',
     'index.php?post_type=sogd-festival&festival=$matches[1]&festival-page=program',
+    'top'
+  );
+
+  // Support /festival/festival-name/speakers URLs
+
+  add_rewrite_rule(
+    '^festival/([^/]*)/bidragsytere/?',
+    'index.php?post_type=sogd-festival&festival=$matches[1]&festival-page=speakers',
     'top'
   );
 });
@@ -55,10 +65,18 @@ add_filter('query_vars', function ($vars) {
 
 
 add_action('template_redirect', function () {
-  if (get_post_type() === 'sogd-festival' && get_query_var('festival-page') === 'program') {
-    add_filter('template_include', function () {
-      return get_template_directory() . '/festival-program.php';
-    });
+  if (get_post_type() === 'sogd-festival') {
+    $festival_page = get_query_var('festival-page');
+
+    if ($festival_page === 'program') {
+      add_filter('template_include', function () {
+        return get_template_directory() . '/festival-program.php';
+      });
+    } elseif ($festival_page === 'speakers') {
+      add_filter('template_include', function () {
+        return get_template_directory() . '/festival-speakers.php';
+      });
+    }
   }
 });
 

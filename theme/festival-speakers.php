@@ -35,30 +35,25 @@ query_posts($args);
   <?php sogd_output_festival_header($festival) ?>
   <div class="ssod-listing__content">
     <div class="ssod-listing__header">
-      <h1>Program</h1>
+      <h1>Bidragsytere</h1>
     </div>
-    <div class="ssod-festival-program">
-      <?php $previous_event_day = '' ?>
-      <?php $first = true ?>
-      <?php while (have_posts()) : the_post(); ?>
-        <?php if (eo_get_the_start('d') !== $previous_event_day) : ?>
-          <?php if (!$first) : ?>
-            </ul>
-          <?php endif ?>
-          <h2 class="ssod-festival-program__day-header">
-            <span class="ssod-festival-program__day"><?php echo eo_the_start('l') ?></span>
-            <span class="ssod-festival-program__date"><?php echo eo_the_start('d.M') ?></span>
-          </h2>
-          <ul class="ssod-event-list">
-          <?php $first = false ?>
+    <?php $previous_event_day = '' ?>
+    <?php $first = true ?>
+    <?php while (have_posts()) : the_post(); ?>
+      <?php if (eo_get_the_start('d') !== $previous_event_day) : ?>
+        <?php if (!$first) : ?>
+          </ul>
         <?php endif ?>
-        <li>
-          <?php eo_get_template_part('eo-loop-single-event-festival'); ?>
-        </li>
-        <?php $previous_event_day = eo_get_the_start('d') ?>
-      <?php endwhile; ?>
-      </ul>
-    </div>
+        <h2><?php echo eo_the_start('l') ?></h2>
+        <ul class="ssod-event-list">
+        <?php $first = false ?>
+      <?php endif ?>
+      <li>
+        <?php eo_get_template_part('eo-loop-single-event-festival'); ?>
+      </li>
+      <?php $previous_event_day = eo_get_the_start('d') ?>
+    <?php endwhile; ?>
+    </ul>
   </div>
 </main>
 
