@@ -3,17 +3,6 @@
 $festival = get_page_by_path(get_query_var('festival'), OBJECT, 'sogd-festival');
 $event_cat = sogd_get_festival_parent_event_cat($festival);
 
-$events = eo_get_events(array(
-  'event-category' => $festival
-));
-
-$args = array(
-  'cat' => array_map(function ($cat) {
-    return "-$cat";
-  }, $festival_parent_cats),
-  'paged' => $paged,
-);
-
 $args = array(
   'post_type' => 'event',
   'suppress_filters' => false,
@@ -49,7 +38,7 @@ query_posts($args);
             <span class="ssod-festival-program__day"><?php echo eo_the_start('l') ?></span>
             <span class="ssod-festival-program__date"><?php echo eo_the_start('d.M') ?></span>
           </h2>
-          <ul class="ssod-event-list">
+          <ul class="ssod-event-list ssod-event-list--festival">
           <?php $first = false ?>
         <?php endif ?>
         <li>

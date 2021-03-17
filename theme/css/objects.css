@@ -454,11 +454,6 @@
   width: 4rem;
 }
 
-.ssod-listing--festival .ssod-post-meta .avatar-wrap {
-  border-left-color: var(--color-festival);
-  border-right-color: var(--color-festival);
-}
-
 /* -------------------------------------------------------------------------- */
 
 .ssod-listing--festival {
@@ -481,6 +476,15 @@
 
 .ssod-listing--festival .ssod-listing__content {
   background-color: hsla(var(--hsl-background-text), 0.5);
+}
+
+.ssod-listing--festival .ssod-post-meta .avatar-wrap {
+  border-left-color: var(--color-festival);
+  border-right-color: var(--color-festival);
+}
+
+.ssod-listing--festival .ssod-listing__header::after {
+  margin-bottom: 0;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -677,6 +681,10 @@
   margin-bottom: var(--space-7);
 }
 
+.ssod-event-list--festival > li {
+  margin-bottom: var(--space-5);
+}
+
 /* -------------------------------------------------------------------------- */
 
 .ssod-event {
@@ -725,19 +733,66 @@
 }
 
 .ssod-event--festival {
-  --festival-program-time-diameter: calc(var(--festival-program-day-diameter) * .6667);
+  --festival-program-time-diameter: calc(
+    var(--festival-program-day-diameter) * 0.6667
+  );
 }
+
 .ssod-event--festival .date {
   align-items: center;
   background-color: var(--color-festival);
   border-radius: calc(var(--festival-program-time-diameter) / 2);
   display: flex;
+  font-size: .875rem;
+  font-family: var(--heading-font-family);
   flex-direction: column;
   height: var(--festival-program-time-diameter);
   justify-content: center;
   line-height: 1;
-  margin-left: calc(var(--festival-program-day-diameter) * .3333 / 2);
+  margin-left: calc(var(--festival-program-day-diameter) * 0.3333 / 2);
+  text-shadow: 0 0 var(--space-3) var(--color-background),
+    0 0 var(--space-2) var(--color-background);
   width: var(--festival-program-time-diameter);
+}
+
+.ssod-event--festival .date .start::after {
+  content: "–";
+  display: block;
+  text-align: center;
+  text-shadow: none;
+  font-size: 1.25em;
+  opacity: 0.5;
+  line-height: 0.5;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-speaker-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+}
+
+.ssod-speaker-list li {
+  display: block;
+  margin-bottom: var(--space-7);
+}
+
+.ssod-speaker-list a {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.25rem;
+  text-decoration: none;
+  transition: var(--duration-quick) transform;
+}
+
+.ssod-speaker-list a:hover {
+  transform: scale(1.05);
+}
+
+.ssod-speaker-list h3 {
+  margin-top: var(--space-5);
+  text-align: center;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -888,7 +943,7 @@
   border: 0.5rem solid transparent;
   box-shadow: 0 0 0 0.5rem var(--color-festival);
   height: 20vw;
-  margin: 0 auto;
+  margin: 0.5rem auto;
   max-height: 10rem;
   max-width: 10rem;
   min-height: 7rem;
@@ -1273,6 +1328,10 @@
   line-height: 1;
   margin: var(--space-6) 0;
   width: var(--festival-program-day-diameter);
+}
+
+.ssod-festival-program__day-header:first-child {
+  margin-top: 0;
 }
 
 .ssod-festival-program__day {

@@ -51,7 +51,7 @@
                 <?php echo get_the_post_thumbnail($speaker_id); ?>
               </a>
               <div class="meta">
-                <span class="meta-title">Kurs/foredragsholder</span>
+                <span class="meta-title">Bidragsyter</span>
                 <span class="meta-value">
                   <a href="<?php echo get_the_permalink($speaker_id); ?>">
                     <?php echo get_the_title($speaker_id); ?>
