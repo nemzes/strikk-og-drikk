@@ -430,8 +430,8 @@ function sogd_get_post_festival($post_id)
   }
 
   if ($post_type === 'sogd-speaker') {
-    $post_meta = get_post_meta($post_id, 'sogd_speaker', true);
-    return get_post($post_meta['festival']);
+    $festival_id = get_post_meta($post_id, 'sogd_festival', true);
+    return get_post($festival_id);
   }
 
   $festivals = sogd_get_festivals();

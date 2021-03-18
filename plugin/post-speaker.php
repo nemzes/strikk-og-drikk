@@ -71,7 +71,7 @@ function sogd_post_speaker_config_meta_box()
 function sogd_post_speaker_configuration()
 {
   global $post;
-  $sogd_speaker = get_post_meta($post->ID, 'sogd_speaker', true);
+  $sogd_festival = get_post_meta($post->ID, 'sogd_festival', true);
 ?>
   <input name="sogd_speaker_configuration_nonce" type="hidden" value="<?php echo wp_create_nonce(basename(__FILE__)); ?>">
 
@@ -82,9 +82,9 @@ function sogd_post_speaker_configuration()
     'hide_empty'       => 0,
     'show_option_none' => ' — Please select — ',
     'post_type'        => 'sogd-festival',
-    'id'               => 'sogd_speaker',
-    'name'             => 'sogd_speaker',
-    'selected'         => $sogd_speaker
+    'id'               => 'sogd_festival',
+    'name'             => 'sogd_festival',
+    'selected'         => $sogd_festival
   ));
 }
 
@@ -114,12 +114,12 @@ function sogd_post_speaker_save($post_id)
     return $post_id;
   }
 
-  $old = get_post_meta($post_id, 'sogd_speaker', true);
-  $new = $_POST['sogd_speaker'];
+  $old = get_post_meta($post_id, 'sogd_festival', true);
+  $new = $_POST['sogd_festival'];
 
   if ($new && $new !== $old) {
-    update_post_meta($post_id, 'sogd_speaker', $new);
+    update_post_meta($post_id, 'sogd_festival', $new);
   } elseif ('' === $new && $old) {
-    delete_post_meta($post_id, 'sogd_speaker', $old);
+    delete_post_meta($post_id, 'sogd_festival', $old);
   }
 }

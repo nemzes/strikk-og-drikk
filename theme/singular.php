@@ -3,11 +3,14 @@
 <?php if (have_posts()) : the_post(); ?>
 
   <?php
-    $id = get_the_ID();
-    $post_type = get_post_type($id);
-    $festival = sogd_get_post_festival($id);
-    $is_festival_post = !!$festival;
-    $extra_class = $is_festival_post ? 'singular--festival' : '';
+  $id = get_the_ID();
+  $post_type = get_post_type($id);
+  $festival = sogd_get_post_festival($id);
+  $is_festival_post = !!$festival;
+  $extra_class = $is_festival_post ? 'singular--festival' : '';
+  $show_post_meta =
+    (!in_array($post_type, array('sogd-festival', 'sogd-speaker'))) &&
+    (is_null($festival));
   ?>
 
   <main role="main" aria-label="Content" class="ssod-main singular <?php echo $extra_class ?>">
@@ -21,7 +24,7 @@
         <div class="singular__header">
           <h1><?php the_title(); ?></h1>
 
-          <?php if (!in_array($post_type, array('sogd-festival', 'sogd-speaker'))) : ?>
+          <?php if ($show_post_meta) : ?>
             <div class="ssod-post-meta">
               <span class="avatar-wrap">
                 <?php echo get_avatar(get_the_author_meta('ID'), 128); ?>
