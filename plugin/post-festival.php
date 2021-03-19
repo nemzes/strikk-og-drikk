@@ -8,7 +8,7 @@ add_action('init', function () {
     'sogd-festival',
     array(
       'labels'       => array(
-        'name'               => esc_html('Festivals', 'sogd'),
+        'name'               => esc_html('Festivaler', 'sogd'),
         'singular_name'      => esc_html('Festival', 'sogd'),
         'add_new'            => esc_html('Add New', 'sogd'),
         'add_new_item'       => esc_html('Add New festival', 'sogd'),

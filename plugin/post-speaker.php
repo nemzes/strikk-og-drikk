@@ -8,8 +8,8 @@ add_action('init', function () {
     'sogd-speaker',
     array(
       'labels'       => array(
-        'name'               => esc_html('Speakers', 'sogd'),
-        'singular_name'      => esc_html('Speaker', 'sogd'),
+        'name'               => esc_html('Bidragsytere', 'sogd'),
+        'singular_name'      => esc_html('Bidragsyter', 'sogd'),
         'add_new'            => esc_html('Add New', 'sogd'),
         'add_new_item'       => esc_html('Add New speaker', 'sogd'),
         'edit'               => esc_html('Edit', 'sogd'),

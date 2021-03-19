@@ -4,7 +4,7 @@ defined('ABSPATH') or die('No script kiddies please!');
 add_action('add_meta_boxes', function () {
   add_meta_box(
     'sogd_event_config', // $id
-    'Event configuration', // $title
+    'Festival', // $title
     'sogd_event_configuration', // $callback
     'event', // $screen
     'normal', // $context
@@ -20,7 +20,9 @@ function sogd_event_configuration()
 
   <input name="sogd_event_configuration_nonce" type="hidden" value="<?php echo wp_create_nonce(basename(__FILE__)); ?>">
 
-  <h3>Speaker (for festival only)</h3>
+  <p>This is only relevant if the event belongs to a festival!</p>
+
+  <h3>Bidragsyter</h3>
 
 <?php
   wp_dropdown_pages(array(
