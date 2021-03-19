@@ -6,7 +6,7 @@ $args = array(
   'post_type' => 'sogd-speaker',
   'suppress_filters' => false,
   'posts_per_page' => -1,
-  'meta_key' => 'sogd_speaker',
+  'meta_key' => 'sogd_festival',
   'meta_value' => $festival->ID,
   'orderby' => 'title'
 );

@@ -53,6 +53,24 @@
           <div class="body-text">
             <?php the_content(); ?>
           </div>
+
+          <?php if ($post_type === 'sogd-speaker') : ?>
+            <h2 class="singular__subheader">
+              Arrangementer av <?php the_title(); ?>
+            </h2>
+            <?php
+            $args = array(
+              'post_type' => 'event',
+              'posts_per_page' => -1,
+              'showpastevents' => true,
+              'meta_key' => 'sogd_speaker',
+              'meta_value' => $id,
+            );
+
+            query_posts($args);
+            ?>
+            <?php get_template_part('festival-program-loop') ?>
+          <?php endif; ?>
         </div>
       </div>
 

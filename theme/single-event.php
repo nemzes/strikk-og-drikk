@@ -43,18 +43,17 @@
             </div>
           <?php else : ?>
             <?php
-            $sogd_event_fields = get_post_meta(get_the_ID(), 'sogd_event', true);
-            $speaker_id = is_array($sogd_event_fields) ? $sogd_event_fields['speaker'] : -1;
+            $sogd_speaker = get_post_meta($post->ID, 'sogd_speaker', true);
             ?>
             <div class="ssod-post-meta">
-              <a href="<?php echo get_the_permalink($speaker_id); ?>" class="ssod-speaker-photo ssod-speaker-photo--small">
-                <?php echo get_the_post_thumbnail($speaker_id); ?>
+              <a href="<?php echo get_the_permalink($sogd_speaker); ?>" class="ssod-speaker-photo ssod-speaker-photo--small">
+                <?php echo get_the_post_thumbnail($sogd_speaker); ?>
               </a>
               <div class="meta">
                 <span class="meta-title">Bidragsyter</span>
                 <span class="meta-value">
-                  <a href="<?php echo get_the_permalink($speaker_id); ?>">
-                    <?php echo get_the_title($speaker_id); ?>
+                  <a href="<?php echo get_the_permalink($sogd_speaker); ?>">
+                    <?php echo get_the_title($sogd_speaker); ?>
                   </a>
                 </span>
               </div>

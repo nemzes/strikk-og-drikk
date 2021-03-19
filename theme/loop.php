@@ -31,7 +31,7 @@
             </div>
           </div>
         <?php elseif (get_post_type() === 'sogd-speaker') : ?>
-          <div class="ssod-speaker-summary">
+          <div class="ssod-speaker-summary ssod-speaker-summary--list">
             <div class="ssod-speaker-photo">
               <?php the_post_thumbnail(); ?>
             </div>

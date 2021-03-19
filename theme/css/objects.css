@@ -387,6 +387,13 @@
   margin-top: var(--space-6);
 }
 
+.singular__subheader {
+  border-top: var(--space-2) solid var(--color-mood);
+  font-size: 2rem;
+  margin: var(--space-7) 0 var(--space-6) 0;
+  padding-top: var(--space-6);
+}
+
 @media screen and (max-width: 639px) {
   .singular__content {
     padding-left: var(--space-5);
@@ -420,6 +427,10 @@
 
 .singular--festival .singular__meta {
   border-bottom-width: 0;
+}
+
+.singular--festival .singular__subheader {
+  color: var(--color-festival-text);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -467,6 +478,7 @@
 }
 
 .ssod-listing--festival .ssod-listing__header {
+  margin-bottom: var(--space-7);
   text-align: center;
 }
 
@@ -484,7 +496,7 @@
 }
 
 .ssod-listing--festival .ssod-listing__header::after {
-  margin-bottom: 0;
+  content: none;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -710,7 +722,8 @@
 }
 
 .ssod-event a {
-  text-decoration: none;
+  text-decoration-color: var(--color-mood);
+  transition: all var(--duration-quick);
 }
 
 .ssod-event a:focus,
@@ -750,8 +763,10 @@
   justify-content: center;
   line-height: 1;
   margin-left: calc(var(--festival-program-day-diameter) * 0.3333 / 2);
-  text-shadow: 0 0 var(--space-3) var(--color-background),
-    0 0 var(--space-2) var(--color-background);
+  text-shadow:
+    0 0 var(--space-3) var(--color-background-text),
+    0 0 var(--space-3) var(--color-background-text),
+    0 0 var(--space-2) var(--color-background-text);
   width: var(--festival-program-time-diameter);
 }
 
@@ -788,7 +803,7 @@
 }
 
 .ssod-speaker-list a:hover {
-  transform: scale(1.05);
+  transform: scale(1.015);
 }
 
 .ssod-speaker-list h3 {
@@ -807,7 +822,7 @@
 }
 
 .ssod-post-summary h2 {
-  font-size: 3rem;
+  font-size: 2.25rem;
   margin-bottom: var(--space-5);
   letter-spacing: -0.075rem;
 }
@@ -815,8 +830,8 @@
 .ssod-post-summary h2 a {
   display: inline-block;
   position: relative;
-  text-decoration: none;
-  transition: all 0.4s;
+  text-decoration-color: var(--color-mood);
+  transition: all var(--duration-quick);
 }
 
 .ssod-post-summary h2 a::before {
@@ -825,7 +840,7 @@
   height: 100%;
   left: -1rem;
   position: absolute;
-  transition: all 0.4s;
+  transition: all var(--duration-quick);
   width: calc(100% + 2rem);
 }
 
@@ -848,7 +863,7 @@
   pointer-events: none;
   position: absolute;
   right: 0;
-  transition: all 0.4s;
+  transition: all var(--duration-quick);
 }
 
 .post-edit-link:focus,
@@ -983,6 +998,12 @@
 .ssod-speaker-summary > .ssod-speaker-photo {
   flex: 0 0 auto;
   margin-right: var(--space-7);
+}
+
+.ssod-speaker-summary--list > .ssod-speaker-photo {
+  align-self: start;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .ssod-speaker-summary > .ssod-excerpt {
@@ -1315,6 +1336,7 @@
   background-image: url(../img/thread.svg);
   background-repeat: repeat-y;
   background-position: 0 50%;
+  background-size: var(--festival-program-day-diameter) auto;
 }
 
 .ssod-festival-program__day-header {
