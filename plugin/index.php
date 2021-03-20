@@ -2,7 +2,7 @@
 /*
 Plugin Name: Strikk og Drikk
 Description: Sets up site for Strikk og Drikk
-Version: 1.1.0
+Version: 2.0.0
 Author: Nelson Menezes
 Author URI: https://fittopage.org
 License: MIT
