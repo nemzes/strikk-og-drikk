@@ -18,6 +18,7 @@
 
 .ssod-site .ssod-main {
   flex: 1 1 auto;
+  position: sticky;
 }
 
 .ssod-side .ssod-footer {
@@ -69,12 +70,12 @@
   }
 
   .global-header--wrap {
-    justify-content: center;
+    justify-content: space-between;
     flex-wrap: wrap;
   }
 
   .global-header .ssod-search {
-    margin: var(--space-5);
+    margin: var(--space-5) auto;
   }
 }
 
@@ -465,6 +466,12 @@
   width: 4rem;
 }
 
+@media screen and (max-width: 639px) {
+  .ssod-listing__content {
+    padding: var(--space-6) var(--space-5) var(--space-5) var(--space-5);
+  }
+}
+
 /* -------------------------------------------------------------------------- */
 
 .ssod-listing--festival {
@@ -546,6 +553,12 @@
 
 .festival-header a {
   text-decoration: none;
+}
+
+@media screen and (max-width: 639px) {
+  .festival-header_content {
+    padding: 0 var(--space-5);
+  }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -1146,6 +1159,11 @@
   outline: -webkit-focus-ring-color auto 5px;
 }
 
+.ssod-toggle-menu-input:focus:not(:focus-visible) + .ssod-toggle-menu {
+  outline: 0;
+}
+
+
 .ssod-toggle-menu::after {
   content: url(../img/menu.svg);
   display: block;
@@ -1337,6 +1355,7 @@
   background-repeat: repeat-y;
   background-position: 0 50%;
   background-size: var(--festival-program-day-diameter) auto;
+  contain: layout;
 }
 
 .ssod-festival-program__day-header {
@@ -1354,7 +1373,7 @@
 }
 
 .ssod-festival-program__day-header:first-child {
-  margin-top: 0;
+  margin-top: calc(-1 * var(--space-3));
 }
 
 .ssod-festival-program__day {

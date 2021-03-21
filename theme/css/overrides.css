@@ -33,3 +33,11 @@
 .jetpack_subscription_widget #subscribe-submit {
   display: inline-block;
 }
+
+/* --- Admin bar on small screens --- */
+
+@media screen and (max-width: 600px) {
+  #wpadminbar {
+    position: fixed;
+  }
+}
