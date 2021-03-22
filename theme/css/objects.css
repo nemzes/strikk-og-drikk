@@ -10,9 +10,6 @@
 .ssod-site .global-header {
   flex: 0 0 auto;
   left: 0;
-  position: sticky;
-  top: calc(-1 * var(--header-height));
-  width: 100%;
   z-index: 2;
 }
 
@@ -744,6 +741,20 @@
   text-decoration: underline;
 }
 
+.ssod-event__title {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ssod-event__title h3 {
+  margin-right: var(--space-4);
+}
+
+.ssod-event__title .ssod-categories {
+  margin: var(--space-4) 0;
+}
+
 .ssod-event .overview {
   overflow: hidden;
 }
@@ -1382,6 +1393,28 @@
 
 .ssod-festival-program__date {
   color: var(--color-festival-text-bright);
+}
+
+/* -------------------------------------------------------------------------- */
+
+.ssod-categories {
+  display: inline-block;
+  padding: 0;
+}
+
+.ssod-categories li {
+  display: inline-block;
+  font-family: var(--base-font-family);
+  font-size: .875rem;
+  font-weight: normal;
+  padding: 4px 8px;
+  border-radius: 8px;
+  text-shadow:
+    1px 1px 1px #fff,
+    1px -1px 1px #fff,
+    -1px 1px 1px #fff,
+    -1px -1px 1px #fff;
+  line-height: 1;
 }
 
 /* -------------------------------------------------------------------------- */
