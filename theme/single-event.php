@@ -57,6 +57,7 @@
                   </a>
                 </span>
               </div>
+              <?php get_template_part('post-categories'); ?>
             </div>
           <?php endif ?>
         </div>
