@@ -15,8 +15,9 @@ html {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--heading-font-family);
   font-size: inherit;
-  font-weight: bold;
+  font-weight: 400;
   margin: 0;
+  text-rendering: optimizeLegibility;
 }
 
 :disabled {
@@ -26,4 +27,12 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
   color: var(--color-brand);
+}
+
+label {
+  cursor: pointer;
+}
+
+.no-js .js-only {
+  display: none;
 }
