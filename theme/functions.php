@@ -61,11 +61,13 @@ function ssod_scripts()
 {
   if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
     // Custom scripts
+    $version = wp_get_theme()->get('Version');
+    
     wp_register_script(
       'ssod_scripts',
       get_template_directory_uri() . '/js/scripts.js',
       array(),
-      '1.0.0'
+      $version
     );
 
     // Enqueue Scripts
@@ -511,105 +513,105 @@ function sogd_output_festival_header($festival)
         </nav>
       </div>
     </header>
-  <?php
-}
+    <?php
+  }
 
-function sogd_output_festival_links($festival)
-{
-  if ($festival_parent_cat = sogd_get_festival_parent_cat($festival)) {
-  ?>
-    <ul>
-      <li>
-        <a href="<?php the_permalink($festival->ID) ?>/program">
-          Program
-        </a>
-      </li>
-      <li>
-        <a href="<?php the_permalink($festival->ID) ?>/bidragsytere">
-          Bidragsytere
-        </a>
-      </li>
-
-      <?php
-      wp_list_categories(array(
-        'child_of' => $festival_parent_cat,
-        'hide_empty' => false,
-        'hierarchical' => false,
-        'title_li' => null,
-        'show_option_none' => false,
-      ));
-
-      $festival_posts = sogd_get_festival_root_posts($festival_parent_cat);
-
-      foreach ($festival_posts as $post) {
-      ?>
+  function sogd_output_festival_links($festival)
+  {
+    if ($festival_parent_cat = sogd_get_festival_parent_cat($festival)) {
+    ?>
+      <ul>
         <li>
-          <a href="<?php the_permalink($post->ID) ?>">
-            <?php echo htmlspecialchars($post->post_title); ?>
+          <a href="<?php the_permalink($festival->ID) ?>/program">
+            Program
           </a>
         </li>
-      <?php
-      }
-      ?>
-    </ul>
-<?php
-  }
-}
+        <li>
+          <a href="<?php the_permalink($festival->ID) ?>/bidragsytere">
+            Bidragsytere
+          </a>
+        </li>
 
-function sogd_get_festival_root_posts($festival_cat_id)
-{
-  $query = new WP_Query(array(
-    'category__in' => $festival_cat_id
-  ));
+        <?php
+        wp_list_categories(array(
+          'child_of' => $festival_parent_cat,
+          'hide_empty' => false,
+          'hierarchical' => false,
+          'title_li' => null,
+          'show_option_none' => false,
+        ));
 
-  return $query->get_posts();
-}
+        $festival_posts = sogd_get_festival_root_posts($festival_parent_cat);
 
-function sogd_output_page_content($page_id)
-{
-  $query = new WP_Query(array(
-    'p' => $page_id,
-    //'post_type' => 'page',
-  ));
-
-  if ($query->have_posts()) {
-    while ($query->have_posts()) {
-      $query->the_post();
-      the_content(false);
+        foreach ($festival_posts as $post) {
+        ?>
+          <li>
+            <a href="<?php the_permalink($post->ID) ?>">
+              <?php echo htmlspecialchars($post->post_title); ?>
+            </a>
+          </li>
+        <?php
+        }
+        ?>
+      </ul>
+  <?php
     }
-    wp_reset_postdata();
   }
-}
 
-function sogd_get_all_festivals_parent_cats()
-{
-  $festivals = sogd_get_festivals();
+  function sogd_get_festival_root_posts($festival_cat_id)
+  {
+    $query = new WP_Query(array(
+      'category__in' => $festival_cat_id
+    ));
 
-  $cats = array_map(
-    function ($festival) {
-      return sogd_get_festival_parent_cat($festival);
-    },
-    $festivals
-  );
+    return $query->get_posts();
+  }
 
-  return $cats;
-}
+  function sogd_output_page_content($page_id)
+  {
+    $query = new WP_Query(array(
+      'p' => $page_id,
+      //'post_type' => 'page',
+    ));
 
-function sogd_get_all_festivals_parent_events_cats()
-{
-  $festivals = sogd_get_festivals();
+    if ($query->have_posts()) {
+      while ($query->have_posts()) {
+        $query->the_post();
+        the_content(false);
+      }
+      wp_reset_postdata();
+    }
+  }
 
-  $cats = array_map(
-    function ($festival) {
-      return sogd_get_festival_parent_event_cat($festival);
-    },
-    $festivals
-  );
+  function sogd_get_all_festivals_parent_cats()
+  {
+    $festivals = sogd_get_festivals();
 
-  return $cats;
-}
+    $cats = array_map(
+      function ($festival) {
+        return sogd_get_festival_parent_cat($festival);
+      },
+      $festivals
+    );
 
-function sogd_get_category_classname($cat)
-{
-  return 'cat-' . $cat->term_id;
-}
+    return $cats;
+  }
+
+  function sogd_get_all_festivals_parent_events_cats()
+  {
+    $festivals = sogd_get_festivals();
+
+    $cats = array_map(
+      function ($festival) {
+        return sogd_get_festival_parent_event_cat($festival);
+      },
+      $festivals
+    );
+
+    return $cats;
+  }
+
+  function sogd_get_category_classname($cat)
+  {
+    return 'cat-' . $cat->term_id;
+  }
