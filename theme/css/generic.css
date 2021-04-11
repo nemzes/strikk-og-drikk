@@ -36,3 +36,9 @@ label {
 .no-js .js-only {
   display: none;
 }
+
+@media print {
+  a {
+    text-decoration: none;
+  }
+}

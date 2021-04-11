@@ -32,6 +32,16 @@
   }
 }
 
+@media print {
+  .ssod-site {
+    height: auto;
+  }
+
+  .ssod-site .global-header {
+    display: none;
+  }
+}
+
 /* -------------------------------------------------------------------------- */
 
 .global-header {
@@ -399,6 +409,12 @@
   }
 }
 
+@media print {
+  .singular__header h1 {
+    font-size: 2rem;
+  }
+}
+
 /* -------------------------------------------------------------------------- */
 
 .singular--festival {
@@ -469,6 +485,16 @@
   }
 }
 
+@media print {
+  .ssod-listing__header h1 {
+    font-size: 2rem;
+  }
+
+  .ssod-listing__content {
+    padding: var(--space-4);
+  }
+}
+
 /* -------------------------------------------------------------------------- */
 
 .ssod-listing--festival {
@@ -518,14 +544,8 @@
   color: var(--color-festival-text);
   padding: var(--space-4) 0 0 0;
   position: sticky;
-  text-shadow:
-    1px 1px #fff,
-    1px -1px #fff,
-    -1px -1px #fff,
-    -1px 1px #fff,
-    0 0 var(--space-3) #fff,
-    0 0 var(--space-4) #fff,
-    0 0 var(--space-5) #fff;
+  text-shadow: 1px 1px #fff, 1px -1px #fff, -1px -1px #fff, -1px 1px #fff,
+    0 0 var(--space-3) #fff, 0 0 var(--space-4) #fff, 0 0 var(--space-5) #fff;
   top: 0;
   z-index: 410;
 }
@@ -570,7 +590,7 @@
   }
 
   .festival-header ul {
-    background-color: rgba(255, 255, 255, .33);
+    background-color: rgba(255, 255, 255, 0.33);
     border-top: 1px solid var(--color-festival-text-bright);
     box-shadow: 0 5px 10px 3px rgb(0 0 0 / 12.5%);
     font-family: var(--base-font-family);
@@ -586,6 +606,18 @@
 
   .festival-header_content {
     padding: 0 var(--space-5);
+  }
+}
+
+@media print {
+  .festival-header {
+    background-color: transparent;
+    border-bottom: 3pt solid var(--color-festival);
+    box-shadow: none;
+  }
+
+  .festival-header ul {
+    display: none;
   }
 }
 
@@ -811,15 +843,14 @@
   background-color: var(--color-festival);
   border-radius: calc(var(--festival-program-time-diameter) / 2);
   display: flex;
-  font-size: .9375rem;
+  font-size: 0.9375rem;
   font-family: var(--heading-font-family);
   flex-direction: column;
   height: var(--festival-program-time-diameter);
   justify-content: center;
   line-height: 1.125;
   margin-left: calc(var(--festival-program-day-diameter) * 0.3333 / 2);
-  text-shadow:
-    1px 1px var(--color-background-text),
+  text-shadow: 1px 1px var(--color-background-text),
     1px -1px var(--color-background-text),
     -1px -1px var(--color-background-text),
     -1px 1px var(--color-background-text),
@@ -838,6 +869,26 @@
   font-size: 1.25em;
   opacity: 0.5;
   line-height: 0.5;
+}
+
+@media print {
+  .ssod-event h3 {
+    font-size: 1.125rem;
+  }
+
+  .ssod-event .excerpt {
+    font-size: 0.875rem;
+    white-space: normal;
+  }
+
+  .ssod-event--festival .date {
+    background-color: transparent;
+    border: var(--space-3) solid var(--color-festival);
+  }
+
+  .ssod-event__title .ssod-categories {
+    margin: var(--space-2) 0;
+  }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -1210,7 +1261,6 @@
   outline: 0;
 }
 
-
 .ssod-toggle-menu::after {
   content: url(../img/menu.svg);
   display: block;
@@ -1248,6 +1298,23 @@
   position: absolute;
   right: var(--space-2);
   text-decoration: none;
+}
+
+@media print {
+  .ssod-footer {
+    background-color: transparent;
+    border-top: 3pt solid var(--color-mood);
+    margin-top: 0;
+    padding-top: var(--space-4);
+  }
+
+  .ssod-footer__widgets {
+    display: none;
+  }
+
+  .ssod-footer__pi {
+    display: none;
+  }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -1435,6 +1502,24 @@
   color: var(--color-festival-text-bright);
 }
 
+@media print {
+  .ssod-festival-program {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+    display: grid;
+    grid-template-columns: var(--festival-program-day-diameter) 1fr;
+  }
+
+  .ssod-festival-program__day-header {
+    margin: 0;
+  }
+
+  .ssod-festival-program .ssod-event-list {
+    border-top: 1px solid var(--color-festival);
+    padding-top: var(--space-5);
+  }
+}
+
 /* -------------------------------------------------------------------------- */
 
 .ssod-categories {
@@ -1445,7 +1530,7 @@
 .ssod-categories li {
   display: inline-block;
   font-family: var(--base-font-family);
-  font-size: .875rem;
+  font-size: 0.875rem;
   font-weight: normal;
   padding: 4px 8px;
   border-radius: 6px;
@@ -1459,6 +1544,13 @@
 
 .ssod-categories input {
   margin-right: var(--space-3);
+}
+
+@media print {
+  .ssod-categories li {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
 }
 
 /* -------------------------------------------------------------------------- */

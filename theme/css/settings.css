@@ -42,3 +42,18 @@
 
   --duration-quick: .2s;
 }
+
+@media print{
+  :root {
+    --background-image-festival: none;
+    --background-image-festival-subtle: none;
+    --hsl-background: 0, 0%, 100%;
+    --hsl-background-text: 0, 0%, 100%;
+    --hsl-text: 0, 0%, 0%;
+    font-size: 10pt;
+  }
+
+  * {
+    text-shadow: none !important;
+  }
+}
