@@ -16,8 +16,11 @@ services:
      image: wordpress:5
      volumes:
       - ./data/wp-content:/var/www/html/wp-content
+      #- /home/ubuntu/mac/Projects/strikk-og-drikk/data/wp-content:/var/www/html/wp-content
       - ./plugin:/var/www/html/wp-content/plugins/sogd
+      #- /home/ubuntu/mac/Projects/strikk-og-drikk/plugin:/var/www/html/wp-content/plugins/sogd
       - ./theme:/var/www/html/wp-content/themes/sogd
+      #- /home/ubuntu/mac/Projects/strikk-og-drikk/theme:/var/www/html/wp-content/themes/sogd
      depends_on:
        - sogd_db
      ports:
