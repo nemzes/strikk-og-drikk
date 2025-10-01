@@ -125,6 +125,7 @@
   text-shadow: 0 0 var(--space-3) #fff;
   line-height: 0.95;
   letter-spacing: -0.03em;
+  text-wrap-style: balance;
 }
 
 .festival-hero__heading a {
